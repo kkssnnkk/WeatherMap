@@ -1,16 +1,16 @@
 ﻿namespace WeatherMap
 {
-    partial class Form1
+    partial class MapForm
     {
         /// <summary>
-        /// Обязательная переменная конструктора.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Освободить все используемые ресурсы.
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Код, автоматически созданный конструктором форм Windows
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -35,11 +35,12 @@
             // 
             this.map.Bearing = 0F;
             this.map.CanDragMap = true;
+            this.map.Dock = System.Windows.Forms.DockStyle.Fill;
             this.map.EmptyTileColor = System.Drawing.Color.Navy;
             this.map.GrayScaleMode = false;
             this.map.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.map.LevelsKeepInMemmory = 5;
-            this.map.Location = new System.Drawing.Point(12, 12);
+            this.map.Location = new System.Drawing.Point(0, 0);
             this.map.MarkersEnabled = true;
             this.map.MaxZoom = 2;
             this.map.MinZoom = 2;
@@ -53,20 +54,20 @@
             this.map.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.map.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.map.ShowTileGridLines = false;
-            this.map.Size = new System.Drawing.Size(541, 426);
+            this.map.Size = new System.Drawing.Size(800, 450);
             this.map.TabIndex = 0;
             this.map.Zoom = 0D;
             this.map.Load += new System.EventHandler(this.map_Load);
             this.map.MouseClick += new System.Windows.Forms.MouseEventHandler(this.map_MouseClick);
             // 
-            // Form1
+            // MapForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.map);
-            this.Name = "Form1";
-            this.Text = "WeatherMap";
+            this.Name = "MapForm";
+            this.Text = "MapForm";
             this.ResumeLayout(false);
 
         }
@@ -76,4 +77,3 @@
         private GMap.NET.WindowsForms.GMapControl map;
     }
 }
-
