@@ -26,14 +26,18 @@ namespace WeatherMap
             InitializeComponent();
         }
 
-        private void button1_MouseClick(object sender, MouseEventArgs e)
+        // render map window 
+        private void chooseOnMap_MouseClick(object sender, MouseEventArgs e)
         {
             _mapForm.ShowDialog();
         }
 
+        // render settings window
         private void label2_MouseClick(object sender, MouseEventArgs e)
         {
             _settingsForm.ShowDialog();
         }
+
+        
     }
 }

@@ -30,7 +30,7 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.chooseOnMap = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -52,17 +52,17 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Enter location or";
             // 
-            // button1
+            // chooseOnMap
             // 
-            this.button1.AutoSize = true;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(143, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 30);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Choose on map";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button1_MouseClick);
+            this.chooseOnMap.AutoSize = true;
+            this.chooseOnMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chooseOnMap.Location = new System.Drawing.Point(143, 9);
+            this.chooseOnMap.Name = "chooseOnMap";
+            this.chooseOnMap.Size = new System.Drawing.Size(131, 30);
+            this.chooseOnMap.TabIndex = 2;
+            this.chooseOnMap.Text = "Choose on map";
+            this.chooseOnMap.UseVisualStyleBackColor = true;
+            this.chooseOnMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chooseOnMap_MouseClick);
             // 
             // label2
             // 
@@ -81,7 +81,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 736);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.chooseOnMap);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Name = "MainForm";
@@ -95,7 +95,7 @@
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button chooseOnMap;
         private System.Windows.Forms.Label label2;
     }
 }
