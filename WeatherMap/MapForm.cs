@@ -13,13 +13,15 @@ using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
 using GMap.NET.ObjectModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WeatherMap
 {
     public partial class MapForm : Form
     {
-        private GMapOverlay Points = new GMapOverlay("Points"); // мітки на карті
-        private GMapMarker Point; // мітка
+        private readonly GMapOverlay _points = new GMapOverlay("Points"); // мітки на карті
+        private GMapMarker _point; // мітка
+        private new const string Location = "Zaporizhzhia, Ukraine";
 
         public MapForm()
         {
@@ -37,19 +39,19 @@ namespace WeatherMap
             map.DragButton = MouseButtons.Left;
             map.ShowCenter = false;
             map.ShowTileGridLines = false;
-            map.Overlays.Add(Points); // відображення на карті міток зі списка Points
-            SetPointer(GetCoords("Zaporizhzhia, Ukraine")); // встановлюємо мітку
+            map.Overlays.Add(_points); // відображення на карті міток зі списка Points
+            SetPointer(GetCoords(Location)); // встановлюємо мітку
         }
 
         private void SetPointer(PointLatLng point)
         {
-            if (Points.Markers.Any()) // якщо є мітка
-                Points.Markers.Clear(); // чистимо список міток
+            if (_points.Markers.Any()) // якщо є мітка
+                _points.Markers.Clear(); // чистимо список міток
 
-            this.Point = new GMarkerGoogle(point, GMarkerGoogleType.red_dot); // створюємо нову мітку
-            this.Point.ToolTipText = $"Lat: {point.Lat}\nLng: {point.Lng}"; // текст мітки
+            this._point = new GMarkerGoogle(point, GMarkerGoogleType.red_dot); // створюємо нову мітку
+            this._point.ToolTipText = $"Lat: {point.Lat}\nLng: {point.Lng}"; // текст мітки
             
-            Points.Markers.Add(this.Point); // додаєм мітку у список міток
+            _points.Markers.Add(this._point); // додаєм мітку у список міток
             
             map.Position = point; // центруємо карту
         }

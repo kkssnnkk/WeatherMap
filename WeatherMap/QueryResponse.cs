@@ -20,6 +20,7 @@ namespace WeatherMap
         public int ID { get; }
         public string Name { get; }
         public int Cod { get; }
+        public int Temperature { get; }
 
         public QueryResponse(string jsonResponse)
         {
@@ -34,7 +35,7 @@ namespace WeatherMap
             ValidRequest = true;
             Coordinates = new Coordinates(jsonData.SelectToken("coord"));
 
-            foreach (JToken weather in jsonData.SelectToken("weather"))
+            foreach (var weather in jsonData.SelectToken("weather"))
                 WeatherList.Add(new Weather(weather));
 
             Base = jsonData.SelectToken("base").ToString();
@@ -51,7 +52,9 @@ namespace WeatherMap
             
             if (jsonData.SelectToken("snow") != null)
                 Snow = new Snow(jsonData.SelectToken("snow"));
-            
+
+
+            Temperature = int.Parse(jsonData.SelectToken("temperature").ToString(), CultureInfo.InvariantCulture);
             Clouds = new Clouds(jsonData.SelectToken("clouds"));
             Sys = new Sys(jsonData.SelectToken("sys"));
             ID = int.Parse(jsonData.SelectToken("id").ToString(), CultureInfo.InvariantCulture);
@@ -59,5 +62,4 @@ namespace WeatherMap
             Cod = int.Parse(jsonData.SelectToken("cod").ToString(), CultureInfo.InvariantCulture);
         }
     }
-
 }

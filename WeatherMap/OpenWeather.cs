@@ -26,7 +26,7 @@ namespace WeatherMap
         {
             var jsonResponse = await _httpClient.GetStringAsync(GenerateRequestUrl(queryString)).ConfigureAwait(false);
             var query = new QueryResponse(jsonResponse);
-
+            
             return query.ValidRequest ? query : null;
         }
 

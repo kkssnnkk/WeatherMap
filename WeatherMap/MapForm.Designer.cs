@@ -67,7 +67,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.map);
             this.Name = "MapForm";
-            this.Text = "MapForm";
+            this.Text = "Map";
             this.ResumeLayout(false);
 
         }

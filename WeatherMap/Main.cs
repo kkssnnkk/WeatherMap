@@ -28,8 +28,8 @@ namespace WeatherMap
             if (mainData.SelectToken("sea_level") != null)
                 SeaLevelAtm = double.Parse(mainData.SelectToken("sea_level").ToString(), CultureInfo.InvariantCulture);
 
-            if (mainData.SelectToken("grnd_level") != null)
-                GroundLevelAtm = double.Parse(mainData.SelectToken("grnd_level").ToString(), CultureInfo.InvariantCulture);
+            if (mainData.SelectToken("ground_level") != null)
+                GroundLevelAtm = double.Parse(mainData.SelectToken("ground_level").ToString(), CultureInfo.InvariantCulture);
         }
     }
 }

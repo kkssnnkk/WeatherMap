@@ -35,5 +35,14 @@ namespace WeatherMap
         {
             _settingsForm.ShowDialog();
         }
+        
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData != Keys.Enter) return;
+
+            lCity.Text = @"Zaporizhzhia";
+
+            _mapForm.ShowDialog();
+        }
     }
 }
