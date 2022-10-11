@@ -131,16 +131,10 @@
             this.Controls.Add(this.tbCity);
             this.Name = "MainForm";
             this.Text = "WeatherMap";
-            this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        #endregion
-
-        private System.Windows.Forms.TextBox tbCity;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bChoose;
         private System.Windows.Forms.Label lSettings;
