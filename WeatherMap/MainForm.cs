@@ -13,6 +13,8 @@ using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
 using GMap.NET.ObjectModel;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace WeatherMap
 {
@@ -26,25 +28,35 @@ namespace WeatherMap
             InitializeComponent();
         }
 
-        // render map window 
-        private void chooseOnMap_MouseClick(object sender, MouseEventArgs e)
+        private void btnChooseOnMap_MouseClick(object sender, MouseEventArgs e)
         {
-            _mapForm.ShowDialog();
-        }
-
-        // render settings window
-        private void label2_MouseClick(object sender, MouseEventArgs e)
-        {
-            _settingsForm.ShowDialog();
+            if (_mapForm.ShowDialog() != DialogResult.OK)
+                return;
         }
         
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        // render map window 
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData != Keys.Enter) return;
+            if (e.KeyData != Keys.Enter) 
+                return;
 
-            lCity.Text = @"Zaporizhzhia";
+            // TEST
+            
+            ApiCalls apiCalls = new ApiCalls();
+            
+
+            string data = apiCalls.getJsonResponseString(tbSearch.Text);
+
+            // END_TEST
 
             _mapForm.ShowDialog();
+        }
+        
+        // render settings window
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_settingsForm.ShowDialog() != DialogResult.OK)
+                return;
         }
     }
 }
