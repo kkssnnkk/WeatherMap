@@ -22,9 +22,12 @@ namespace WeatherMap
     {
         private readonly MapForm _mapForm = new MapForm();
         private readonly SettingsForm _settingsForm = new SettingsForm();
+        private readonly Exceptions _exceptions = new Exceptions();
 
         public MainForm()
         {
+            // disable window resizing
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; this.MaximizeBox = false;
             InitializeComponent();
         }
 
@@ -44,11 +47,14 @@ namespace WeatherMap
             
             ApiCalls apiCalls = new ApiCalls();
             
-
             string data = apiCalls.getJsonResponseString(tbSearch.Text);
+            if (_exceptions.validateJsonAnswer(data) == false) 
+            {
+                MessageBox.Show("Pls, check your input correctness.", "No results found :(", MessageBoxButtons.OK, MessageBoxIcon.Warning);  
+                return; 
+            }
 
             // END_TEST
-
             _mapForm.ShowDialog();
         }
         
