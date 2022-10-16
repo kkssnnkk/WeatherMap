@@ -20,9 +20,11 @@ namespace WeatherMap
 {
     public partial class MainForm : Form
     {
-        private readonly MapForm _mapForm = new MapForm();
+        private MapForm _mapForm = new MapForm();
         private readonly SettingsForm _settingsForm = new SettingsForm();
         private readonly Exceptions _exceptions = new Exceptions();
+        private ApiCalls _apiCalls = new ApiCalls();
+        
 
         public MainForm()
         {
@@ -33,8 +35,18 @@ namespace WeatherMap
 
         private void btnChooseOnMap_MouseClick(object sender, MouseEventArgs e)
         {
-            if (_mapForm.ShowDialog() != DialogResult.OK)
-                return;
+            
+            if (_mapForm.ShowDialog() != DialogResult.OK) 
+            {
+                string data = _apiCalls.getJsonResponseStringByCoords(_mapForm.coords.Lat, _mapForm.coords.Lng); // client will dispose after api call 
+                if (_exceptions.validateJsonAnswer(data) == false)
+                {
+                    //MessageBox.Show("Unexpected error.", "No results found :(", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+               
+                // do sth with api response...
+            }
         }
         
         // render map window 
@@ -43,19 +55,17 @@ namespace WeatherMap
             if (e.KeyData != Keys.Enter) 
                 return;
 
-            // TEST
-            
-            ApiCalls apiCalls = new ApiCalls();
-            
-            string data = apiCalls.getJsonResponseString(tbSearch.Text);
+            if (!_exceptions.validateSearchQuery(tbSearch.Text))
+                return;
+
+            string data = _apiCalls.getJsonResponseString(tbSearch.Text);
             if (_exceptions.validateJsonAnswer(data) == false) 
             {
                 MessageBox.Show("Pls, check your input correctness.", "No results found :(", MessageBoxButtons.OK, MessageBoxIcon.Warning);  
                 return; 
             }
-
-            // END_TEST
-            _mapForm.ShowDialog();
+            
+            // do sth with api response... 
         }
         
         // render settings window

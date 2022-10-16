@@ -21,26 +21,22 @@ namespace WeatherMap
     {
         private readonly GMapOverlay _points = new GMapOverlay("Points"); // мітки на карті
         private GMapMarker _point; // мітка
-        private new const string Location = "Zaporizhzhia, Ukraine";
+        private new string Location = "Kiev";
+        public PointLatLng coords;
 
         public MapForm()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; this.MaximizeBox = false;
             InitializeComponent();
+            setupMap();
         }
 
-        private void map_Load(object sender, EventArgs e)
+        public MapForm(string city) 
         {
-            map.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
-            map.MinZoom = 2;
-            map.MaxZoom = 16;
-            map.Zoom = 10;
-            map.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
-            map.CanDragMap = true;
-            map.DragButton = MouseButtons.Left;
-            map.ShowCenter = false;
-            map.ShowTileGridLines = false;
-            map.Overlays.Add(_points); // відображення на карті міток зі списка Points
-            SetPointer(GetCoords(Location)); // встановлюємо мітку
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; this.MaximizeBox = false;
+            this.Location = city;
+            InitializeComponent();
+            setupMap();
         }
 
         private void SetPointer(PointLatLng point)
@@ -73,6 +69,27 @@ namespace WeatherMap
 
             PointLatLng point = map.FromLocalToLatLng(e.X, e.Y); // створюємо кординати мітки 
             SetPointer(point); // встановлюємо нову мітку
+            this.coords = new PointLatLng(map.Position.Lat, map.Position.Lng); // зберігаємо lat / lng для доступу з main форми
+        }
+
+        private void confirmButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void setupMap() 
+        {
+            map.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+            map.MinZoom = 2;
+            map.MaxZoom = 16;
+            map.Zoom = 10;
+            map.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
+            map.CanDragMap = true;
+            map.DragButton = MouseButtons.Left;
+            map.ShowCenter = false;
+            map.ShowTileGridLines = false;
+            map.Overlays.Add(_points); // відображення на карті міток зі списка Points
+            SetPointer(GetCoords(Location)); // встановлюємо мітку
         }
     }
 }

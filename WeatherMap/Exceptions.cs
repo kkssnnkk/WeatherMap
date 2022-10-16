@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 
+
 namespace WeatherMap
 {
     public class Exceptions
@@ -16,5 +17,12 @@ namespace WeatherMap
             if (jsObject.ContainsKey("success") && jsObject["success"].Value<bool>() == false) return false;
             else return true;
         }
+
+        public bool validateSearchQuery(string text) 
+        {
+            return text.Length == 0 || text.All(char.IsLetter) ? true : false;
+        }
+
+
     }
 }
