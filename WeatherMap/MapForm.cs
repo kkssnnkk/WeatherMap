@@ -19,65 +19,65 @@ namespace WeatherMap
 {
     public partial class MapForm : Form
     {
-        private readonly GMapOverlay _points = new GMapOverlay("Points"); // мітки на карті
-        private GMapMarker _point; // мітка
-        private new string Location = "Kiev";
-        public PointLatLng coords;
+        // мітки на карті
+        private readonly GMapOverlay _points = new GMapOverlay("Points");
+        // мітка
+        private GMapMarker _point;
+        private string _location = "Zaporizhzhia";
+        public PointLatLng Coords;
 
         public MapForm()
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle; this.MaximizeBox = false;
             InitializeComponent();
-            setupMap();
-        }
-
-        public MapForm(string city) 
-        {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle; this.MaximizeBox = false;
-            this.Location = city;
-            InitializeComponent();
-            setupMap();
+            SetupMap();
         }
 
         private void SetPointer(PointLatLng point)
         {
             if (_points.Markers.Any()) // якщо є мітка
                 _points.Markers.Clear(); // чистимо список міток
-
-            this._point = new GMarkerGoogle(point, GMarkerGoogleType.red_dot); // створюємо нову мітку
-            this._point.ToolTipText = $"Lat: {point.Lat}\nLng: {point.Lng}"; // текст мітки
             
-            _points.Markers.Add(this._point); // додаєм мітку у список міток
+            // створюємо нову мітку
+            _point = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
             
-            map.Position = point; // центруємо карту
+            // текст мітки
+            _point.ToolTipText = $"Lat: {point.Lat}\nLng: {point.Lng}"; 
+            
+            // додаєм мітку у список міток
+            _points.Markers.Add(_point); 
+            
+            // центруємо карту
+            map.Position = point; 
         }
 
-        private PointLatLng GetCoords(string q) // поверне кординати мітки за певним запитом
+        // поверне кординати мітки за певним запитом
+        private PointLatLng GetCoords(string location) 
         {
-            GMapControl m = new GMapControl();
+            GMapControl mapControl = new GMapControl();
             
-            m.SetPositionByKeywords(q);
+            mapControl.SetPositionByKeywords(location);
             
-            PointLatLng point = new PointLatLng(m.Position.Lat, m.Position.Lng);
+            PointLatLng point = new PointLatLng(mapControl.Position.Lat, mapControl.Position.Lng);
 
             return point;
         }
 
         private void map_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Middle) return;
+            if (e.Button != MouseButtons.Middle) 
+                return;
 
-            PointLatLng point = map.FromLocalToLatLng(e.X, e.Y); // створюємо кординати мітки 
-            SetPointer(point); // встановлюємо нову мітку
-            this.coords = new PointLatLng(map.Position.Lat, map.Position.Lng); // зберігаємо lat / lng для доступу з main форми
+            // створюємо кординати мітки
+            PointLatLng point = map.FromLocalToLatLng(e.X, e.Y);  
+            
+            // встановлюємо нову мітку
+            SetPointer(point); 
+            
+            // зберігаємо lat / lng для доступу з main форми
+            Coords = new PointLatLng(map.Position.Lat, map.Position.Lng); 
         }
 
-        private void confirmButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void setupMap() 
+        private void SetupMap() 
         {
             map.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             map.MinZoom = 2;
@@ -88,8 +88,15 @@ namespace WeatherMap
             map.DragButton = MouseButtons.Left;
             map.ShowCenter = false;
             map.ShowTileGridLines = false;
-            map.Overlays.Add(_points); // відображення на карті міток зі списка Points
-            SetPointer(GetCoords(Location)); // встановлюємо мітку
+            // відображення на карті міток зі списка Points
+            map.Overlays.Add(_points); 
+            // встановлюємо мітку
+            SetPointer(GetCoords(_location)); 
+        }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

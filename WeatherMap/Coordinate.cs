@@ -12,9 +12,8 @@ namespace WeatherMap
             if (coordinateData is null)
                 throw new System.ArgumentNullException(nameof(coordinateData));
 
-            Longitude = double.Parse(coordinateData.SelectToken("lon").ToString(), CultureInfo.InvariantCulture);
-            Latitude = double.Parse(coordinateData.SelectToken("lat").ToString(), CultureInfo.InvariantCulture);
-
+            Longitude = double.Parse(coordinateData.SelectToken("lon")?.ToString() ?? string.Empty, CultureInfo.InvariantCulture);
+            Latitude = double.Parse(coordinateData.SelectToken("lat")?.ToString() ?? string.Empty, CultureInfo.InvariantCulture);
         }
     }
 }

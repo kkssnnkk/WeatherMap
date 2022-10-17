@@ -5,24 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-
-
 namespace WeatherMap
 {
     public class Exceptions
     {
-        public bool validateJsonAnswer(string json_data) 
+        public bool ValidateJsonAnswer(string jsonData) 
         {
-            var jsObject = JObject.Parse(json_data);
-            if (jsObject.ContainsKey("success") && jsObject["success"].Value<bool>() == false) return false;
-            else return true;
+            var jsObject = JObject.Parse(jsonData);
+            return jsObject.ContainsKey("success") && jsObject["success"].Value<bool>();
         }
 
-        public bool validateSearchQuery(string text) 
+        public bool ValidateSearchQuery(string text) 
         {
-            return text.Length == 0 || text.All(char.IsLetter) ? true : false;
+            return text.Length != 0 && text.All(char.IsLetter);
         }
-
-
     }
 }

@@ -14,8 +14,6 @@ namespace WeatherMap
     {
         public SettingsForm()
         {
-            // disable window resizing
-            this.FormBorderStyle = FormBorderStyle.FixedSingle; this.MinimizeBox = false;  this.MaximizeBox = false;
             InitializeComponent();
         }
     }
