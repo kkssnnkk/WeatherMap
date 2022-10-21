@@ -40,13 +40,9 @@ namespace WeatherMap
             if (e.KeyData != Keys.Enter || !_exceptions.ValidateSearchQuery(tbSearch.Text)) 
                 return;
 
-            JObject joResponse = JObject.Parse(_apiCalls.GetJsonResponseString(tbSearch.Text));
+            var joResponse = JObject.Parse(_apiCalls.GetJsonResponseString(tbSearch.Text));
 
-            JObject ojObject = (JObject)joResponse["request"];
-
-            JArray array = (JArray)ojObject["request"];
-
-            int temp = int.Parse(array[0].ToString());
+            //lTemp.Text = joResponse["request"]["query"].ToString();
 
             /*if (!_exceptions.ValidateJsonAnswer()) 
             {
