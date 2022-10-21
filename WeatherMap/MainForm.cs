@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace WeatherMap
@@ -15,7 +17,7 @@ namespace WeatherMap
             InitializeComponent();
         }
 
-        private void btnChooseOnMap_MouseClick(object sender, MouseEventArgs e)
+        public void btnChooseOnMap_MouseClick(object sender, MouseEventArgs e)
         {
             if (_mapForm.ShowDialog() != DialogResult.OK)
                 return;
@@ -31,26 +33,32 @@ namespace WeatherMap
 
             // do sth with api response...
         }
-        
+
         // render map window 
-        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        public void tbSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData != Keys.Enter || !_exceptions.ValidateSearchQuery(tbSearch.Text)) 
                 return;
 
-            var data = _apiCalls.GetJsonResponseString(tbSearch.Text);
-            
-            if (!_exceptions.ValidateJsonAnswer(data)) 
+            JObject joResponse = JObject.Parse(_apiCalls.GetJsonResponseString(tbSearch.Text));
+
+            JObject ojObject = (JObject)joResponse["request"];
+
+            JArray array = (JArray)ojObject["request"];
+
+            int temp = int.Parse(array[0].ToString());
+
+            /*if (!_exceptions.ValidateJsonAnswer()) 
             {
                 MessageBox.Show(@"Pls, check your input correctness.", @"No results found :(", MessageBoxButtons.OK, MessageBoxIcon.Warning);  
                 return; 
+            }*/
+
+            // do sth with api response...
             }
-            
-            // do sth with api response... 
-        }
-        
+
         // render settings window
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        public void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_settingsForm.ShowDialog() != DialogResult.OK)
                 return;

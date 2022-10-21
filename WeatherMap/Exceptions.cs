@@ -17,7 +17,7 @@ namespace WeatherMap
 
         public bool ValidateSearchQuery(string text) 
         {
-            return text.Length != 0 && text.All(char.IsLetter);
+            return text.Any();
         }
     }
 }
