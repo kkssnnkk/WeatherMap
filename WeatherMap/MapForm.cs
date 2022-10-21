@@ -14,6 +14,7 @@ using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms.ToolTips;
 using GMap.NET.ObjectModel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Globalization;
 
 namespace WeatherMap
 {
@@ -25,6 +26,10 @@ namespace WeatherMap
         private GMapMarker _point;
         private string _location = "Zaporizhzhia";
         public PointLatLng Coords;
+        NumberFormatInfo NFI = new NumberFormatInfo()
+        {
+            NumberDecimalSeparator = ".",
+        };
 
         public MapForm()
         {
@@ -58,6 +63,8 @@ namespace WeatherMap
             mapControl.SetPositionByKeywords(location);
             
             PointLatLng point = new PointLatLng(mapControl.Position.Lat, mapControl.Position.Lng);
+
+            Coords = new PointLatLng(mapControl.Position.Lat, mapControl.Position.Lng);
 
             return point;
         }

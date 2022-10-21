@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapForm));
             this.map = new GMap.NET.WindowsForms.GMapControl();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -62,12 +63,18 @@
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(714, 415);
+            this.btnConfirm.AutoSize = true;
+            this.btnConfirm.BackColor = System.Drawing.Color.Red;
+            this.btnConfirm.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnConfirm.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnConfirm.Location = new System.Drawing.Point(0, 418);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirm.Size = new System.Drawing.Size(801, 32);
             this.btnConfirm.TabIndex = 1;
             this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // MapForm
@@ -78,10 +85,13 @@
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.map);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MapForm";
             this.Text = "Choose location by clicking middle mouse button...";
             this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

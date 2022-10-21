@@ -12,7 +12,7 @@ namespace WeatherMap
         public bool ValidateJsonAnswer(string jsonData) 
         {
             var jsObject = JObject.Parse(jsonData);
-            return jsObject.ContainsKey("success") && jsObject["success"].Value<bool>();
+            return !jsObject.ContainsKey("success");
         }
 
         public bool ValidateSearchQuery(string text) 
