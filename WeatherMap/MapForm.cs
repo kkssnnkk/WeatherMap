@@ -26,10 +26,6 @@ namespace WeatherMap
         private GMapMarker _point;
         private string _location = "Zaporizhzhia";
         public PointLatLng Coords;
-        NumberFormatInfo NFI = new NumberFormatInfo()
-        {
-            NumberDecimalSeparator = ".",
-        };
 
         public MapForm()
         {

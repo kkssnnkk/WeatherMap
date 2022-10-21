@@ -12,11 +12,8 @@ namespace WeatherMap
         // api base
         private const string BaseUrl = "http://api.weatherstack.com/current?access_key="; 
         private readonly HttpClient _client = new HttpClient();
+        NumberFormatInfo NFI = new NumberFormatInfo() { NumberDecimalSeparator = "." };
 
-        NumberFormatInfo NFI = new NumberFormatInfo()
-        {
-            NumberDecimalSeparator = ".",
-        };
         public string GetJsonResponseString(string city) 
         {
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); // change this request string in order to use new api

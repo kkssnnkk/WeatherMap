@@ -13,10 +13,6 @@ namespace WeatherMap
         private readonly SettingsForm _settingsForm = new SettingsForm();
         private readonly Exceptions _exceptions = new Exceptions();
         private readonly ApiCalls _apiCalls = new ApiCalls();
-        NumberFormatInfo NFI = new NumberFormatInfo()
-        {
-            NumberDecimalSeparator = ".",
-        };
         
         public MainForm()
         {
