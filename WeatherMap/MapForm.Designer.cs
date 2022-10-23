@@ -67,7 +67,7 @@
             this.btnConfirm.BackColor = System.Drawing.Color.Red;
             this.btnConfirm.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnConfirm.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnConfirm.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnConfirm.Location = new System.Drawing.Point(0, 418);
             this.btnConfirm.Name = "btnConfirm";
@@ -91,7 +91,6 @@
             this.Text = "Choose location by clicking middle mouse button...";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
