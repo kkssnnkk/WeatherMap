@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Diagnostics;
 using System.Windows.Forms;
-
+using System;
 
 namespace WeatherMap
 {
     public class Exceptions
     {
-        public bool ValidateJsonAnswer(string jsonData) 
+        public bool ValidateJsonAnswer(string jsonData)
         {
-            var jsObject = JObject.Parse(jsonData);
-            return !jsObject.ContainsKey("success");
+            return !JObject.Parse(jsonData).ContainsKey("success");
         }
 
-        public bool ValidateSearchQuery(string text) 
+        public bool ValidateJsonAnswer(JObject jsonData)
+        {
+            return !jsonData.ContainsKey("success");
+        }
+
+        public bool ValidateSearchQuery(string text)
         {
             return text.Any();
         }
@@ -45,7 +45,7 @@ namespace WeatherMap
                         if (process.MainWindowHandle == null || string.IsNullOrEmpty(process.MainWindowTitle))
                         {
                             //MessageBox.Show(@"Process was closed.", @"Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            process.Kill(); 
+                            //process.Kill(); 
                             break;
                         }
                     }

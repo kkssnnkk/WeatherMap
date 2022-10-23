@@ -41,93 +41,74 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(15, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(6);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(12, 12);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 20);
+            this.label1.Size = new System.Drawing.Size(92, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "Localization";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(15, 87);
-            this.label2.Margin = new System.Windows.Forms.Padding(6);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(12, 74);
+            this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 20);
+            this.label2.Size = new System.Drawing.Size(71, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "Font size";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(15, 159);
-            this.label3.Margin = new System.Windows.Forms.Padding(6);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(12, 136);
+            this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 20);
+            this.label3.Size = new System.Drawing.Size(57, 21);
             this.label3.TabIndex = 2;
             this.label3.Text = "Theme";
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Ukrainian",
-            "English"});
-            this.comboBox1.Location = new System.Drawing.Point(15, 47);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
+            this.comboBox1.Items.AddRange(new object[] { "Ukrainian", "English" });
+            this.comboBox1.Location = new System.Drawing.Point(12, 39);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(220, 28);
+            this.comboBox1.Size = new System.Drawing.Size(214, 29);
             this.comboBox1.TabIndex = 3;
             // 
             // comboBox2
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Dark",
-            "Light"});
-            this.comboBox2.Location = new System.Drawing.Point(15, 191);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(6);
+            this.comboBox2.Items.AddRange(new object[] { "Dark", "Light" });
+            this.comboBox2.Location = new System.Drawing.Point(12, 163);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(220, 28);
+            this.comboBox2.Size = new System.Drawing.Size(214, 29);
             this.comboBox2.TabIndex = 5;
             // 
             // comboBox3
             // 
-            this.comboBox3.AutoCompleteCustomSource.AddRange(new string[] {
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18"});
-            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox3.AutoCompleteCustomSource.AddRange(new string[] { "12", "13", "14", "15", "16", "17", "18" });
+            this.comboBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "12",
-            "13",
-            "14",
-            "15"});
-            this.comboBox3.Location = new System.Drawing.Point(15, 119);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(6);
+            this.comboBox3.Items.AddRange(new object[] { "12", "13", "14", "15" });
+            this.comboBox3.Location = new System.Drawing.Point(12, 101);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(148, 28);
+            this.comboBox3.Size = new System.Drawing.Size(148, 29);
             this.comboBox3.TabIndex = 6;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox1.Location = new System.Drawing.Point(175, 121);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(6);
+            this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Location = new System.Drawing.Point(166, 103);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(60, 24);
+            this.checkBox1.Size = new System.Drawing.Size(60, 25);
             this.checkBox1.TabIndex = 7;
             this.checkBox1.Text = "Bold";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -136,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(249, 235);
+            this.ClientSize = new System.Drawing.Size(238, 206);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
@@ -153,7 +134,6 @@
             this.Text = "Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

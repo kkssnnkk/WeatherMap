@@ -1,102 +1,121 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GMap.NET;
-using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using GMap.NET.WindowsForms.ToolTips;
-using GMap.NET.ObjectModel;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Globalization;
 
 namespace WeatherMap
 {
     public partial class MapForm : Form
     {
-        // мітки на карті
-        private readonly GMapOverlay _points = new GMapOverlay("Points");
-        // мітка
+        // point on map
+        private readonly GMapOverlay _points = new GMapOverlay("points");
+        
+        private readonly GMapControl _mapControl = new GMapControl();
+        
+        // point
         private GMapMarker _point;
-        private string _location = "Zaporizhzhia";
+        
         public PointLatLng Coords;
+        
+        // default location
+        private new const string Location = "Zaporizhzhia";
+
+        // formatting floating point types
+        private readonly NumberFormatInfo _nfi = new NumberFormatInfo() { NumberDecimalSeparator = "." };
 
         public MapForm()
         {
             InitializeComponent();
-            SetupMap();
+            InitializeMap();
         }
-
-        private void SetPointer(PointLatLng point)
-        {
-            if (_points.Markers.Any()) // якщо є мітка
-                _points.Markers.Clear(); // чистимо список міток
-            
-            // створюємо нову мітку
-            _point = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
-            
-            // текст мітки
-            _point.ToolTipText = $"Lat: {point.Lat}\nLng: {point.Lng}"; 
-            
-            // додаєм мітку у список міток
-            _points.Markers.Add(_point); 
-            
-            // центруємо карту
-            map.Position = point; 
-        }
-
-        // поверне кординати мітки за певним запитом
-        private PointLatLng GetCoords(string location) 
-        {
-            GMapControl mapControl = new GMapControl();
-            
-            mapControl.SetPositionByKeywords(location);
-            
-            PointLatLng point = new PointLatLng(mapControl.Position.Lat, mapControl.Position.Lng);
-
-            Coords = new PointLatLng(mapControl.Position.Lat, mapControl.Position.Lng);
-
-            return point;
-        }
-
-        private void map_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Middle) 
-                return;
-
-            // створюємо кординати мітки
-            PointLatLng point = map.FromLocalToLatLng(e.X, e.Y);  
-            
-            // встановлюємо нову мітку
-            SetPointer(point); 
-            
-            // зберігаємо lat / lng для доступу з main форми
-            Coords = new PointLatLng(map.Position.Lat, map.Position.Lng); 
-        }
-
-        private void SetupMap() 
+        
+        // initialize default settings for map
+        private void InitializeMap() 
         {
             map.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+            
+            // setting minimal zoom
             map.MinZoom = 2;
+            
+            // setting maximal zoom
             map.MaxZoom = 16;
+            
+            // setting default zoom
             map.Zoom = 10;
+            
+            // setting mouse wheel zoom type
             map.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
+            
+            // setting ability to move the map
             map.CanDragMap = true;
+            
+            // setting mouse button for drag map
             map.DragButton = MouseButtons.Left;
+            
             map.ShowCenter = false;
+            
             map.ShowTileGridLines = false;
-            // відображення на карті міток зі списка Points
+            
+            // display of points from the points list on the map
             map.Overlays.Add(_points); 
-            // встановлюємо мітку
-            SetPointer(GetCoords(_location)); 
+            
+            // set the default point
+            SetPointer(GetCoords(Location));
         }
 
+        // will set the point on map
+        private void SetPointer(PointLatLng point)
+        {
+            // if there are points
+            if (_points.Markers.Any())
+            {
+                // clear the points list
+                _points.Markers.Clear();
+            }
+
+            // create a new point
+            _point = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
+            
+            // point text
+            _point.ToolTipText = $"Lat: {point.Lat.ToString(_nfi)}\nLng: {point.Lng.ToString(_nfi)}"; 
+            
+            // add the point to point list
+            _points.Markers.Add(_point); 
+            
+            // center map
+            map.Position = point;
+        }
+
+        // will return the point coordinates on a given location name
+        private PointLatLng GetCoords(string location) 
+        {
+            // setting coords by location
+            _mapControl.SetPositionByKeywords(location);
+            
+            // write coords
+            Coords = new PointLatLng(_mapControl.Position.Lat, _mapControl.Position.Lng);
+            
+            return Coords;
+        }
+
+        // mouse click event for map
+        private void map_MouseClick(object sender, MouseEventArgs e)
+        {
+            // only the middle button is pressed
+            if (e.Button != MouseButtons.Middle)
+                return;
+
+            // we create the coordinates of the point and store the lat / lng for access from the main form
+            Coords = map.FromLocalToLatLng(e.X, e.Y);  
+            
+            // setting new point
+            SetPointer(Coords);
+        }
+
+        // button click event
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             Close();
