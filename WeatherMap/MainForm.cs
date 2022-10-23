@@ -17,6 +17,7 @@ namespace WeatherMap
         public MainForm()
         {
             InitializeComponent();
+            _exceptions.runProcessLurking(); // ensures that the process will be closed (will avoid BG stucking)
         }
 
         public void UpdateInfo(JObject data)
@@ -26,17 +27,18 @@ namespace WeatherMap
             lCity.Location = new Point(groupBox1.Width / 2 - lCity.Width / 2, lCity.Location.Y);
 
             lTemp.Text = data["current"]["temperature"].ToString() + " °C";
-
+            
             pictureBox1.Load(data["current"]["weather_icons"][0].ToString());
-
+            
             lStatus.Text = data["current"]["weather_descriptions"][0].ToString();
         }
 
         public void btnChooseOnMap_MouseClick(object sender, MouseEventArgs e)
         {
             _mapForm.ShowDialog();
-            
-            // client will dispose after api call
+
+            if (_exceptions.ValidateCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng) == false) return;
+
             var data = _apiCalls.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng); 
            
             if (!_exceptions.ValidateJsonAnswer(data))

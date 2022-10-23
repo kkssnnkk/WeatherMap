@@ -8,7 +8,7 @@ namespace WeatherMap
     public class ApiCalls
     {
         // api provider access key
-        private const string AccessKey = ""; 
+        private const string AccessKey = "8fbd89f9c4e78c164e606e6685fc54f0"; 
         // api base
         private const string BaseUrl = "http://api.weatherstack.com/current?access_key="; 
         private readonly HttpClient _client = new HttpClient();
