@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows.Forms;
 
 namespace WeatherMap
 {
@@ -7,6 +8,11 @@ namespace WeatherMap
         public SettingsForm()
         {
             InitializeComponent();
+        }
+
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MainForm.ApplySettings();
         }
     }
 }

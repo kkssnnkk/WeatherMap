@@ -17,7 +17,7 @@ namespace WeatherMap
         public Snow Snow { get; }
         public Clouds Clouds { get; }
         public Sys Sys { get; }
-        public int ID { get; }
+        public int Id { get; }
         public string Name { get; }
         public int Cod { get; }
         public int Temperature { get; }
@@ -57,7 +57,7 @@ namespace WeatherMap
             Temperature = int.Parse(jsonData.SelectToken("temperature").ToString(), CultureInfo.InvariantCulture);
             Clouds = new Clouds(jsonData.SelectToken("clouds"));
             Sys = new Sys(jsonData.SelectToken("sys"));
-            ID = int.Parse(jsonData.SelectToken("id").ToString(), CultureInfo.InvariantCulture);
+            Id = int.Parse(jsonData.SelectToken("id").ToString(), CultureInfo.InvariantCulture);
             Name = jsonData.SelectToken("name").ToString();
             Cod = int.Parse(jsonData.SelectToken("cod").ToString(), CultureInfo.InvariantCulture);
         }

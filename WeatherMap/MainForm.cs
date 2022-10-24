@@ -8,13 +8,55 @@ namespace WeatherMap
     public partial class MainForm : Form
     {
         private readonly MapForm _mapForm = new MapForm();
-        private readonly SettingsForm _settingsForm = new SettingsForm();
+        private static readonly SettingsForm SettingsForm = new SettingsForm();
         private readonly Exceptions _exceptions = new Exceptions();
-        private readonly ApiCalls _apiCalls = new ApiCalls();
+        private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("f89ee63dd27c064a028c39511344acdb");
+        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
         
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        public static void ApplySettings()
+        {
+            switch (SettingsForm.cbLocalization.Text)
+            {
+                case "English":
+                    break;
+                case "Ukrainian":
+                    break;
+            }
+
+            switch (SettingsForm.tbFontSize.Value)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
+
+            switch (SettingsForm.cbBold.Checked)
+            {
+                case true:
+                    break;
+                case false:
+                    break;
+            }
+
+            switch (SettingsForm.cbTheme.Text)
+            {
+                case "Light":
+                    break;
+                case "Dark":
+                    break;
+            }
         }
 
         private void CenterElement(Label label)
@@ -45,7 +87,15 @@ namespace WeatherMap
             _mapForm.ShowDialog();
             
             // client will dispose after api call
-            UpdateInfo(JObject.Parse(_apiCalls.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
+            switch (SettingsForm.cbApi.Text)
+            {
+                case "WeatherStack":
+                    UpdateInfo(JObject.Parse(_weatherStackApi.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
+                    break;
+                case "OpenWeatherMap":
+                    UpdateInfo(JObject.Parse(_openWeatherMapApi.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
+                    break;
+            }
         }
         
         private void cbSearch_KeyDown(object sender, KeyEventArgs e)
@@ -55,13 +105,21 @@ namespace WeatherMap
                 return;
 
             // client will dispose after api call
-            UpdateInfo(JObject.Parse(_apiCalls.GetJsonResponseString(cbSearch.Text)));
+            switch (SettingsForm.cbApi.Text)
+            {
+                case "WeatherStack":
+                    UpdateInfo(JObject.Parse(_weatherStackApi.GetJsonResponseStringByName(cbSearch.Text)));
+                    break;
+                case "OpenWeatherMap":
+                    UpdateInfo(JObject.Parse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
+                    break;
+            }
         }
         
         // render settings window
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _settingsForm.ShowDialog();
+            SettingsForm.ShowDialog();
         }
     }
 }

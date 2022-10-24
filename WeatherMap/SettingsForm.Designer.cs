@@ -29,102 +29,130 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.lLocalization = new System.Windows.Forms.Label();
+            this.lSize = new System.Windows.Forms.Label();
+            this.lTheme = new System.Windows.Forms.Label();
+            this.cbLocalization = new System.Windows.Forms.ComboBox();
+            this.cbTheme = new System.Windows.Forms.ComboBox();
+            this.cbBold = new System.Windows.Forms.CheckBox();
+            this.cbApi = new System.Windows.Forms.ComboBox();
+            this.lApi = new System.Windows.Forms.Label();
+            this.tbFontSize = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.tbFontSize)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lLocalization
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Localization";
+            this.lLocalization.AutoSize = true;
+            this.lLocalization.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lLocalization.Location = new System.Drawing.Point(12, 12);
+            this.lLocalization.Margin = new System.Windows.Forms.Padding(3);
+            this.lLocalization.Name = "lLocalization";
+            this.lLocalization.Size = new System.Drawing.Size(92, 21);
+            this.lLocalization.TabIndex = 0;
+            this.lLocalization.Text = "Localization";
             // 
-            // label2
+            // lSize
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(12, 74);
-            this.label2.Margin = new System.Windows.Forms.Padding(3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 21);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Font size";
+            this.lSize.AutoSize = true;
+            this.lSize.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lSize.Location = new System.Drawing.Point(12, 74);
+            this.lSize.Margin = new System.Windows.Forms.Padding(3);
+            this.lSize.Name = "lSize";
+            this.lSize.Size = new System.Drawing.Size(71, 21);
+            this.lSize.TabIndex = 1;
+            this.lSize.Text = "Font size";
             // 
-            // label3
+            // lTheme
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(12, 136);
-            this.label3.Margin = new System.Windows.Forms.Padding(3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 21);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Theme";
+            this.lTheme.AutoSize = true;
+            this.lTheme.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lTheme.Location = new System.Drawing.Point(12, 136);
+            this.lTheme.Margin = new System.Windows.Forms.Padding(3);
+            this.lTheme.Name = "lTheme";
+            this.lTheme.Size = new System.Drawing.Size(57, 21);
+            this.lTheme.TabIndex = 2;
+            this.lTheme.Text = "Theme";
             // 
-            // comboBox1
+            // cbLocalization
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] { "Ukrainian", "English" });
-            this.comboBox1.Location = new System.Drawing.Point(12, 39);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(214, 29);
-            this.comboBox1.TabIndex = 3;
+            this.cbLocalization.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbLocalization.FormattingEnabled = true;
+            this.cbLocalization.Items.AddRange(new object[] { "Ukrainian", "English" });
+            this.cbLocalization.Location = new System.Drawing.Point(12, 39);
+            this.cbLocalization.Name = "cbLocalization";
+            this.cbLocalization.Size = new System.Drawing.Size(214, 29);
+            this.cbLocalization.TabIndex = 3;
+            this.cbLocalization.Text = "English";
             // 
-            // comboBox2
+            // cbTheme
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] { "Dark", "Light" });
-            this.comboBox2.Location = new System.Drawing.Point(12, 163);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(214, 29);
-            this.comboBox2.TabIndex = 5;
+            this.cbTheme.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbTheme.FormattingEnabled = true;
+            this.cbTheme.Items.AddRange(new object[] { "Dark", "Light" });
+            this.cbTheme.Location = new System.Drawing.Point(12, 163);
+            this.cbTheme.Name = "cbTheme";
+            this.cbTheme.Size = new System.Drawing.Size(214, 29);
+            this.cbTheme.TabIndex = 5;
+            this.cbTheme.Text = "Light";
             // 
-            // comboBox3
+            // cbBold
             // 
-            this.comboBox3.AutoCompleteCustomSource.AddRange(new string[] { "12", "13", "14", "15", "16", "17", "18" });
-            this.comboBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] { "12", "13", "14", "15" });
-            this.comboBox3.Location = new System.Drawing.Point(12, 101);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(148, 29);
-            this.comboBox3.TabIndex = 6;
+            this.cbBold.AutoSize = true;
+            this.cbBold.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbBold.Location = new System.Drawing.Point(166, 103);
+            this.cbBold.Name = "cbBold";
+            this.cbBold.Size = new System.Drawing.Size(60, 25);
+            this.cbBold.TabIndex = 7;
+            this.cbBold.Text = "Bold";
+            this.cbBold.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // cbApi
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox1.Location = new System.Drawing.Point(166, 103);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(60, 25);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Bold";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbApi.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbApi.FormattingEnabled = true;
+            this.cbApi.Items.AddRange(new object[] { "WeatherStack", "OpenWeatherMap" });
+            this.cbApi.Location = new System.Drawing.Point(12, 232);
+            this.cbApi.Name = "cbApi";
+            this.cbApi.Size = new System.Drawing.Size(214, 29);
+            this.cbApi.TabIndex = 8;
+            this.cbApi.Text = "WeatherStack";
+            // 
+            // lApi
+            // 
+            this.lApi.AutoSize = true;
+            this.lApi.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lApi.Location = new System.Drawing.Point(12, 205);
+            this.lApi.Margin = new System.Windows.Forms.Padding(3);
+            this.lApi.Name = "lApi";
+            this.lApi.Size = new System.Drawing.Size(33, 21);
+            this.lApi.TabIndex = 9;
+            this.lApi.Text = "Api";
+            // 
+            // tbFontSize
+            // 
+            this.tbFontSize.Location = new System.Drawing.Point(12, 101);
+            this.tbFontSize.Maximum = 5;
+            this.tbFontSize.Minimum = 1;
+            this.tbFontSize.Name = "tbFontSize";
+            this.tbFontSize.Size = new System.Drawing.Size(148, 37);
+            this.tbFontSize.TabIndex = 10;
+            this.tbFontSize.Value = 1;
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(238, 206);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(238, 283);
+            this.Controls.Add(this.tbFontSize);
+            this.Controls.Add(this.lApi);
+            this.Controls.Add(this.cbApi);
+            this.Controls.Add(this.cbBold);
+            this.Controls.Add(this.cbTheme);
+            this.Controls.Add(this.cbLocalization);
+            this.Controls.Add(this.lTheme);
+            this.Controls.Add(this.lSize);
+            this.Controls.Add(this.lLocalization);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -132,18 +160,22 @@
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.tbFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.CheckBox checkBox1;
+        
+        private System.Windows.Forms.Label lApi;
+        private System.Windows.Forms.Label lLocalization;
+        private System.Windows.Forms.Label lSize;
+        private System.Windows.Forms.Label lTheme;
+        public System.Windows.Forms.ComboBox cbLocalization;
+        public System.Windows.Forms.ComboBox cbTheme;
+        public System.Windows.Forms.CheckBox cbBold;
+        public System.Windows.Forms.TrackBar tbFontSize;
+        public System.Windows.Forms.ComboBox cbApi;
     }
 }

@@ -161,7 +161,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiCalls.cs" />
+    <Compile Include="WeatherStackApi.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
@@ -184,7 +184,7 @@
     <Compile Include="MapForm.Designer.cs">
       <DependentUpon>MapForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OpenWeather.cs" />
+    <Compile Include="OpenWeatherMapApi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryResponse.cs" />

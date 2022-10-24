@@ -17,11 +17,7 @@ namespace WeatherMap
             if (mainData is null)
                 throw new ArgumentNullException(nameof(mainData));
 
-            Temperature = new TemperatureObj(
-                 double.Parse(mainData.SelectToken("temp").ToString(), CultureInfo.InvariantCulture),
-                 double.Parse(mainData.SelectToken("temp_min").ToString(), CultureInfo.InvariantCulture),
-                 double.Parse(mainData.SelectToken("temp_max").ToString(), CultureInfo.InvariantCulture));
-
+            Temperature = new TemperatureObj(double.Parse(mainData.SelectToken("temp").ToString(), CultureInfo.InvariantCulture));
             Pressure = double.Parse(mainData.SelectToken("pressure").ToString(), CultureInfo.InvariantCulture);
             Humidity = double.Parse(mainData.SelectToken("humidity").ToString(), CultureInfo.InvariantCulture);
 

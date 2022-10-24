@@ -7,36 +7,44 @@ namespace WeatherMap
         public double CelsiusCurrent { get; }
         public double FahrenheitCurrent { get; }
         public double KelvinCurrent { get; }
-        public double CelsiusMinimum { get; }
-        public double CelsiusMaximum { get; }
-        public double FahrenheitMinimum { get; }
-        public double FahrenheitMaximum { get; }
-        public double KelvinMinimum { get; }
-        public double KelvinMaximum { get; }
 
-        public TemperatureObj(double temp, double min, double max)
+        public TemperatureObj(double temp)
         {
-            KelvinCurrent = temp;
-            KelvinMaximum = max;
-            KelvinMinimum = min;
+            CelsiusCurrent = temp;
 
-            CelsiusCurrent = ConvertToCelsius(KelvinCurrent);
-            CelsiusMaximum = ConvertToCelsius(KelvinMaximum);
-            CelsiusMinimum = ConvertToCelsius(KelvinMinimum);
+            ConvertCelsiusToKelvin(CelsiusCurrent);
 
-            FahrenheitCurrent = ConvertToFahrenheit(CelsiusCurrent);
-            FahrenheitMaximum = ConvertToFahrenheit(CelsiusMaximum);
-            FahrenheitMinimum = ConvertToFahrenheit(CelsiusMinimum);
+            ConvertCelsiusToFahrenheit(CelsiusCurrent);
         }
 
-        private static double ConvertToFahrenheit(double celsius)
+        private static double ConvertCelsiusToKelvin(double celsius)
         {
             return Math.Round(((9.0 / 5.0) * celsius) + 32, 3);
         }
+        
+        private static double ConvertFahrenheitToKelvin(double fahrenheit)
+        {
+            return 1;
+        }
+        
+        private static double ConvertCelsiusToFahrenheit(double celsius)
+        {
+            return Math.Round(((9.0 / 5.0) * celsius) + 32, 3);
+        }
+        
+        private static double ConvertKelvinToFahrenheit(double kelvin)
+        {
+            return 1;
+        }
 
-        private static double ConvertToCelsius(double kelvin)
+        private static double ConvertKelvinToCelsius(double kelvin)
         {
             return Math.Round(kelvin - 273.15, 3);
+        }
+        
+        private static double ConvertFahrenheitToCelsius(double fahrenheit)
+        {
+            return 1;
         }
     }
 }
