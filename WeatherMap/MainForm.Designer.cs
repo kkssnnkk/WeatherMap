@@ -100,7 +100,7 @@
             this.lStatus.Location = new System.Drawing.Point(98, 127);
             this.lStatus.Margin = new System.Windows.Forms.Padding(3);
             this.lStatus.Name = "lStatus";
-            this.lStatus.Size = new System.Drawing.Size(59, 21);
+            this.lStatus.Size = new System.Drawing.Size(56, 21);
             this.lStatus.TabIndex = 3;
             this.lStatus.Text = "aboba";
             // 
@@ -116,7 +116,7 @@
             this.lTemp.Text = "lTemp";
             this.lTemp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lCity
+            // pictureBox
             // 
             this.pictureBox.Location = new System.Drawing.Point(93, 157);
             this.pictureBox.Margin = new System.Windows.Forms.Padding(6);
@@ -128,7 +128,8 @@
             // 
             // menuStrip
             // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.settingsMenu });
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(283, 24);
@@ -170,6 +171,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WeatherMap";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
@@ -177,6 +179,7 @@
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.Label lText;

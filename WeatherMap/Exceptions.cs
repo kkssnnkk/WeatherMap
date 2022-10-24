@@ -32,27 +32,16 @@ namespace WeatherMap
                 !(Convert.ToInt16(lat) == 85 && Convert.ToInt16(lon) == 180);
         }
 
-        public void runProcessLurking() 
+        public void validateExit(FormClosingEventArgs e) 
         {
-            Thread thread = new Thread(delegate () {
-                Process process = null;
-                while (true) 
-                {
-                    Thread.Sleep(5);
-                    try 
-                    { 
-                        process = Process.GetProcessesByName("WeatherMap")[0];
-                        if (process.MainWindowHandle == null || string.IsNullOrEmpty(process.MainWindowTitle))
-                        {
-                            //MessageBox.Show(@"Process was closed.", @"Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            //process.Kill(); 
-                            break;
-                        }
-                    }
-                    catch { continue; };
-                }
-            });
-            thread.Start();
+            if (MessageBox.Show("Exit?", "Closing app...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

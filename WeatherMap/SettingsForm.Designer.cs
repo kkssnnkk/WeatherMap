@@ -75,7 +75,9 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] { "Ukrainian", "English" });
+            this.comboBox1.Items.AddRange(new object[] {
+            "Ukrainian",
+            "English"});
             this.comboBox1.Location = new System.Drawing.Point(12, 39);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(214, 29);
@@ -85,7 +87,9 @@
             // 
             this.comboBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] { "Dark", "Light" });
+            this.comboBox2.Items.AddRange(new object[] {
+            "Dark",
+            "Light"});
             this.comboBox2.Location = new System.Drawing.Point(12, 163);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(214, 29);
@@ -93,10 +97,21 @@
             // 
             // comboBox3
             // 
-            this.comboBox3.AutoCompleteCustomSource.AddRange(new string[] { "12", "13", "14", "15", "16", "17", "18" });
+            this.comboBox3.AutoCompleteCustomSource.AddRange(new string[] {
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18"});
             this.comboBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] { "12", "13", "14", "15" });
+            this.comboBox3.Items.AddRange(new object[] {
+            "12",
+            "13",
+            "14",
+            "15"});
             this.comboBox3.Location = new System.Drawing.Point(12, 101);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(148, 29);
@@ -128,12 +143,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

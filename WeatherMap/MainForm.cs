@@ -15,7 +15,6 @@ namespace WeatherMap
         public MainForm()
         {
             InitializeComponent();
-            _exceptions.runProcessLurking(); // ensures that the process will be closed (will avoid BG stucking)
         }
 
         private void CenterElement(Label label)
@@ -63,6 +62,11 @@ namespace WeatherMap
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _settingsForm.ShowDialog();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _exceptions.validateExit(e);
         }
     }
 }
