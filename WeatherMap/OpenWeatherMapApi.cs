@@ -22,7 +22,7 @@ namespace WeatherMap
         public OpenWeatherMapApi(string accessKey)
         {
             _accessKey = accessKey;
-            _baseUrl = "http://http://api.openweathermap.org/data/2.5/weather?";
+            _baseUrl = "https://api.openweathermap.org/data/2.5/weather?";
             _httpClient = new HttpClient();
             _nfi = new NumberFormatInfo { NumberDecimalSeparator = "." };
         }
