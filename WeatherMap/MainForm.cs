@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -10,9 +9,11 @@ namespace WeatherMap
     {
         private readonly MapForm _mapForm = new MapForm();
         private static readonly SettingsForm SettingsForm = new SettingsForm();
-        private readonly Exceptions _exceptions = new Exceptions();
+        
         private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("f89ee63dd27c064a028c39511344acdb");
         private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
+        private readonly Exceptions _exceptions = new Exceptions();
+
         private float _lLocationFontSize;
         private float _lTempFontSize;
         private float _lStatusFontSize;
@@ -82,35 +83,27 @@ namespace WeatherMap
             label.Location = new Point(groupBox.Width / 2 - label.Width / 2, label.Location.Y);
         }
         
-        private void UpdateInfoFromOWM(JObject data)
+        private void UpdateInfoFromOWM(QueryResponse queryResponse)
         {
-            if (!_exceptions.ValidateJsonAnswer(data))
-                return;
-
-            lLocation.Text = data["name"].ToString();
+            lLocation.Text = queryResponse.Name;
             CenterElement(lLocation);
-
-            lTemp.Text = data["main"]["temp"]?.ToString();
-            CenterElement(lTemp);
             
-            lStatus.Text = data["weather"][0]?["main"]?.ToString();
+            lTemp.Text = queryResponse.Main.Temperature.CelsiusCurrent.ToString(CultureInfo.InvariantCulture);
+            CenterElement(lTemp);
+
+            lStatus.Text = queryResponse.WeatherList[0].Main;
             CenterElement(lStatus);
         }
         
-        private void UpdateInfoFromWS(JObject data)
+        private void UpdateInfoFromWS(QueryResponse queryResponse)
         {
-            if (!_exceptions.ValidateJsonAnswer(data))
-                return;
-
-            pictureBox.Load(data["current"]["weather_icons"]?[0]?.ToString());
-            
-            lLocation.Text = $@"{data["location"]["name"]} | {data["location"]["country"]}";
+            lLocation.Text = queryResponse.Name;
             CenterElement(lLocation);
-
-            lTemp.Text = $@"{data["current"]["temperature"]}°";
+            
+            lTemp.Text = queryResponse.Main.Temperature.CelsiusCurrent.ToString(CultureInfo.InvariantCulture);
             CenterElement(lTemp);
 
-            lStatus.Text = data["current"]["weather_descriptions"]?[0]?.ToString();
+            lStatus.Text = queryResponse.WeatherList[0].Main;
             CenterElement(lStatus);
         }
 
@@ -126,10 +119,10 @@ namespace WeatherMap
             switch (SettingsForm.cbApi.Text)
             {
                 case "OpenWeatherMap":
-                    UpdateInfoFromOWM(JObject.Parse(_openWeatherMapApi.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
+                    UpdateInfoFromOWM(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
                     break;
                 case "WeatherStack":
-                    UpdateInfoFromWS(JObject.Parse(_weatherStackApi.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
+                    UpdateInfoFromWS(new QueryResponse(_weatherStackApi.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
                     break;
             }
         }
@@ -149,10 +142,10 @@ namespace WeatherMap
             switch (SettingsForm.cbApi.Text)
             {
                 case "OpenWeatherMap":
-                    UpdateInfoFromOWM(JObject.Parse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
+                    UpdateInfoFromOWM(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
                     break;
                 case "WeatherStack":
-                    UpdateInfoFromWS(JObject.Parse(_weatherStackApi.GetJsonResponseStringByName(cbSearch.Text)));
+                    UpdateInfoFromWS(new QueryResponse(_weatherStackApi.GetJsonResponseStringByName(cbSearch.Text)));
                     break;
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using Newtonsoft.Json.Linq;
 
 namespace WeatherMap
@@ -16,19 +15,19 @@ namespace WeatherMap
         public Sys(JToken sysData)
         {
             if (sysData is null)
-                throw new ArgumentNullException(nameof(sysData));
+                return;
             
-            Type = int.Parse(sysData.SelectToken("type")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            Type = int.Parse(sysData.SelectToken("type")?.ToString() ?? "0");
 
-            ID = int.Parse(sysData.SelectToken("id")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            ID = int.Parse(sysData.SelectToken("id")?.ToString() ?? "0");
         
-            Message = double.Parse(sysData.SelectToken("message")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            Message = double.Parse(sysData.SelectToken("message")?.ToString() ?? "0");
             
             Country = sysData.SelectToken("country")?.ToString();
             
-            Sunrise = ConvertUnixToDateTime(double.Parse(sysData.SelectToken("sunrise")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture));
+            Sunrise = ConvertUnixToDateTime(double.Parse(sysData.SelectToken("sunrise")?.ToString() ?? "0"));
             
-            Sunset = ConvertUnixToDateTime(double.Parse(sysData.SelectToken("sunset")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture));
+            Sunset = ConvertUnixToDateTime(double.Parse(sysData.SelectToken("sunset")?.ToString() ?? "0"));
         }
 
         private static DateTime ConvertUnixToDateTime(double unixTime)

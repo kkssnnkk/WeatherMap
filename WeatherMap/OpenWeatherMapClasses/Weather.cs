@@ -1,22 +1,23 @@
-﻿using System;
-using System.Globalization;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace WeatherMap
 {
     public class Weather
     {
         public int Id { get; }
+        
         public string Main { get; }
+        
         public string Description { get; }
+        
         public string Icon { get; }
 
         public Weather(JToken weatherData)
         {
             if (weatherData is null)
-                throw new ArgumentNullException(nameof(weatherData));
-
-            Id = int.Parse(weatherData.SelectToken("id")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+                return;
+            
+            Id = int.Parse(weatherData.SelectToken("id")?.ToString() ?? "0");
 
             Main = weatherData.SelectToken("main")?.ToString();
             
@@ -26,59 +27,59 @@ namespace WeatherMap
         }
     }
     
-    public class Clouds : Weather
+    public class Clouds
     {
         public double All { get; }
         
-        public Clouds(JToken cloudsData) : base(cloudsData)
+        public Clouds(JToken cloudsData)
         {
             if (cloudsData is null)
-                throw new ArgumentNullException(nameof(cloudsData));
-
-            All = double.Parse(cloudsData.SelectToken("all")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+                return;
+            
+            All = double.Parse(cloudsData.SelectToken("all")?.ToString() ?? "0");
         }
     }
     
-    public class Rain : Weather
+    public class Rain
     {
         public double H3 { get; }
         
-        public Rain(JToken rainData) : base(rainData)
+        public Rain(JToken rainData)
         {
             if (rainData is null)
-                throw new ArgumentNullException(nameof(rainData));
-
-            H3 = double.Parse(rainData.SelectToken("3h")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+                return;
+            
+            H3 = double.Parse(rainData.SelectToken("3h")?.ToString() ?? "0");
         }
     }
     
-    public class Snow : Weather
+    public class Snow
     {
         public double H3 { get; }
         
-        public Snow(JToken snowData) : base(snowData)
+        public Snow(JToken snowData)
         {
             if (snowData is null)
-                throw new ArgumentException(nameof(snowData));
+                return; 
             
-            H3 = double.Parse(snowData.SelectToken("3h")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            H3 = double.Parse(snowData.SelectToken("3h")?.ToString() ?? "0");
         }
     }
     
-    public class Sun : Weather
+    public class Sun
     {
         public double All { get; }
         
-        public Sun(JToken sunData) : base(sunData)
+        public Sun(JToken sunData)
         {
             if (sunData is null)
-                throw new ArgumentNullException(nameof(sunData));
-
-            All = double.Parse(sunData.SelectToken("all")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+                return;
+            
+            All = double.Parse(sunData.SelectToken("all")?.ToString() ?? "0");
         }
     }
 
-    public class Wind : Weather
+    public class Wind
     {
         public enum DirectionEnum
         {
@@ -107,25 +108,25 @@ namespace WeatherMap
         public double Degree { get; }
         public double Gust { get; }
 
-        public Wind(JToken windData) : base(windData)
+        public Wind(JToken windData)
         {
             if (windData is null)
-                throw new ArgumentNullException(nameof(windData));
-
-            SpeedMetersPerSecond = double.Parse(windData.SelectToken("speed")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+                return;
+            
+            SpeedMetersPerSecond = double.Parse(windData.SelectToken("speed")?.ToString() ?? "0");
             
             SpeedFeetPerSecond = SpeedMetersPerSecond * 3.28084;
             
-            Degree = double.Parse(windData.SelectToken("deg")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            Degree = double.Parse(windData.SelectToken("deg")?.ToString() ?? "0");
             
             Direction = AssignDirection(Degree);
             
-            Gust = double.Parse(windData.SelectToken("gust")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            Gust = double.Parse(windData.SelectToken("gust")?.ToString() ?? "0");
         }
         
-        public static string DirectionEnumToString(DirectionEnum dir)
+        public static string DirectionEnumToString(DirectionEnum direction)
         {
-            switch (dir)
+            switch (direction)
             {
                 case DirectionEnum.East:
                     return "East";
