@@ -35,14 +35,14 @@ namespace WeatherMap
         public bool ValidateCoords(double lat, double lon) 
         {
             return !(Convert.ToInt16(lat) == 85 && Convert.ToInt16(lon) == -180) && 
-                !(Convert.ToInt16(lat) == -85 && Convert.ToInt16(lon) == -180) && 
-                !(Convert.ToInt16(lat) == -85 && Convert.ToInt16(lon) == 180) &&
-                !(Convert.ToInt16(lat) == 85 && Convert.ToInt16(lon) == 180);
+                   !(Convert.ToInt16(lat) == -85 && Convert.ToInt16(lon) == -180) && 
+                   !(Convert.ToInt16(lat) == -85 && Convert.ToInt16(lon) == 180) && 
+                   !(Convert.ToInt16(lat) == 85 && Convert.ToInt16(lon) == 180);
         }
 
-        public void validateExit(FormClosingEventArgs e) 
+        public void ValidateExit(FormClosingEventArgs e) 
         {
-            if (MessageBox.Show("Exit?", "Closing app...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) Environment.Exit(0);
+            if (MessageBox.Show(@"Exit?", @"Closing app...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) Environment.Exit(0);
             else e.Cancel = true;
         }
     }

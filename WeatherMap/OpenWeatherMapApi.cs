@@ -27,20 +27,20 @@ namespace WeatherMap
             _nfi = new NumberFormatInfo { NumberDecimalSeparator = "." };
         }
 
-        // get weather data by city name
+        // getting weather data by city name
         public string GetJsonResponseStringByName(string city) 
         {
-            // change this request string in order to use new api
+            // setting request headers
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             
             // return the read data from the page
             return _httpClient.GetStringAsync(new Uri($"{_baseUrl}q={city}&appid={_accessKey}")).Result;
         }
         
-        // get weather data by coords
+        // getting weather data by coords
         public string GetJsonResponseStringByCoords(double lat, double lng)
         {
-            // change this request string in order to use new api
+            // setting request headers
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             
             // return the read data from the page

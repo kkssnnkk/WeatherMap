@@ -86,6 +86,9 @@ namespace WeatherMap
         {
             _mapForm.ShowDialog();
             
+            if (!_exceptions.ValidateCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)) 
+                return;
+            
             // client will dispose after api call
             switch (SettingsForm.cbApi.Text)
             {
@@ -124,7 +127,7 @@ namespace WeatherMap
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _exceptions.validateExit(e);
+            _exceptions.ValidateExit(e);
         }
     }
 }
