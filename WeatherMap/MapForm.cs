@@ -21,7 +21,7 @@ namespace WeatherMap
         public PointLatLng Coords;
         
         // default location
-        private new const string Location = "Zaporizhzhia";
+        private new const string Location = "Zaporizhzhya";
 
         // formatting floating point types
         private readonly NumberFormatInfo _nfi = new NumberFormatInfo() { NumberDecimalSeparator = "." };

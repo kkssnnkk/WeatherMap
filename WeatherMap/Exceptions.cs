@@ -42,8 +42,10 @@ namespace WeatherMap
 
         public void ValidateExit(FormClosingEventArgs e) 
         {
-            if (MessageBox.Show(@"Exit?", @"Closing app...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) Environment.Exit(0);
-            else e.Cancel = true;
+            if (MessageBox.Show(@"Exit?", @"Closing app...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                Environment.Exit(0);
+            else 
+                e.Cancel = true;
         }
     }
 }

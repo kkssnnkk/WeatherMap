@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
@@ -38,28 +39,29 @@ namespace WeatherMap
             foreach (var weather in jsonData.SelectToken("weather"))
                 WeatherList.Add(new Weather(weather));
 
-            Base = jsonData.SelectToken("base").ToString();
+            Base = jsonData.SelectToken("base")?.ToString();
+            
             Main = new Main(jsonData.SelectToken("main"));
-
-            if (jsonData.SelectToken("visibility") != null)
-                Visibility = double.Parse(jsonData.SelectToken("visibility").ToString(), CultureInfo.InvariantCulture);
-
-            if (jsonData.SelectToken("wind") != null)
-                Wind = new Wind(jsonData.SelectToken("wind"));
             
-            if (jsonData.SelectToken("rain") != null)
-                Rain = new Rain(jsonData.SelectToken("rain"));
+            Visibility = double.Parse(jsonData.SelectToken("visibility")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+
+            Wind = new Wind(jsonData.SelectToken("wind"));
             
-            if (jsonData.SelectToken("snow") != null)
-                Snow = new Snow(jsonData.SelectToken("snow"));
-
-
-            Temperature = int.Parse(jsonData.SelectToken("temperature").ToString(), CultureInfo.InvariantCulture);
+            Rain = new Rain(jsonData.SelectToken("rain"));
+            
+            Snow = new Snow(jsonData.SelectToken("snow"));
+            
+            Temperature = int.Parse(jsonData.SelectToken("temperature")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            
             Clouds = new Clouds(jsonData.SelectToken("clouds"));
+
             Sys = new Sys(jsonData.SelectToken("sys"));
-            Id = int.Parse(jsonData.SelectToken("id").ToString(), CultureInfo.InvariantCulture);
-            Name = jsonData.SelectToken("name").ToString();
-            Cod = int.Parse(jsonData.SelectToken("cod").ToString(), CultureInfo.InvariantCulture);
+            
+            Id = int.Parse(jsonData.SelectToken("id")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            
+            Name = jsonData.SelectToken("name")?.ToString();
+            
+            Cod = int.Parse(jsonData.SelectToken("cod")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
         }
     }
 }

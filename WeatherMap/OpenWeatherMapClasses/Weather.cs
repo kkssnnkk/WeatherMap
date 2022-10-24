@@ -16,10 +16,13 @@ namespace WeatherMap
             if (weatherData is null)
                 throw new ArgumentNullException(nameof(weatherData));
 
-            Id = int.Parse(weatherData.SelectToken("id").ToString(), CultureInfo.InvariantCulture);
-            Main = weatherData.SelectToken("main").ToString();
-            Description = weatherData.SelectToken("description").ToString();
-            Icon = weatherData.SelectToken("icon").ToString();
+            Id = int.Parse(weatherData.SelectToken("id")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+
+            Main = weatherData.SelectToken("main")?.ToString();
+            
+            Description = weatherData.SelectToken("description")?.ToString();
+            
+            Icon = weatherData.SelectToken("icon")?.ToString();
         }
     }
     
@@ -32,8 +35,7 @@ namespace WeatherMap
             if (cloudsData is null)
                 throw new ArgumentNullException(nameof(cloudsData));
 
-            if (cloudsData.SelectToken("all") != null)
-                All = double.Parse(cloudsData.SelectToken("all").ToString(), CultureInfo.InvariantCulture);
+            All = double.Parse(cloudsData.SelectToken("all")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
         }
     }
     
@@ -46,8 +48,7 @@ namespace WeatherMap
             if (rainData is null)
                 throw new ArgumentNullException(nameof(rainData));
 
-            if (rainData.SelectToken("3h") != null)
-                H3 = double.Parse(rainData.SelectToken("3h").ToString(), CultureInfo.InvariantCulture);
+            H3 = double.Parse(rainData.SelectToken("3h")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
         }
     }
     
@@ -59,9 +60,21 @@ namespace WeatherMap
         {
             if (snowData is null)
                 throw new ArgumentException(nameof(snowData));
+            
+            H3 = double.Parse(snowData.SelectToken("3h")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+        }
+    }
+    
+    public class Sun : Weather
+    {
+        public double All { get; }
+        
+        public Sun(JToken sunData) : base(sunData)
+        {
+            if (sunData is null)
+                throw new ArgumentNullException(nameof(sunData));
 
-            if (snowData.SelectToken("3h") != null)
-                H3 = double.Parse(snowData.SelectToken("3h").ToString(), CultureInfo.InvariantCulture);
+            All = double.Parse(sunData.SelectToken("all")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
         }
     }
 
@@ -99,13 +112,15 @@ namespace WeatherMap
             if (windData is null)
                 throw new ArgumentNullException(nameof(windData));
 
-            SpeedMetersPerSecond = double.Parse(windData.SelectToken("speed").ToString(), CultureInfo.InvariantCulture);
+            SpeedMetersPerSecond = double.Parse(windData.SelectToken("speed")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            
             SpeedFeetPerSecond = SpeedMetersPerSecond * 3.28084;
-            Degree = double.Parse(windData.SelectToken("deg").ToString(), CultureInfo.InvariantCulture);
+            
+            Degree = double.Parse(windData.SelectToken("deg")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
+            
             Direction = AssignDirection(Degree);
-
-            if (windData.SelectToken("gust") != null)
-                Gust = double.Parse(windData.SelectToken("gust").ToString(), CultureInfo.InvariantCulture);
+            
+            Gust = double.Parse(windData.SelectToken("gust")?.ToString() ?? throw new ArgumentNullException(), CultureInfo.InvariantCulture);
         }
         
         public static string DirectionEnumToString(DirectionEnum dir)
@@ -170,74 +185,60 @@ namespace WeatherMap
         
         private DirectionEnum AssignDirection(double degree)
         {
-            if (fB(degree, 348.75, 360))
+            if (CalcDirection(degree, 348.75, 360))
                 return DirectionEnum.North;
 
-            if (fB(degree, 0, 11.25))
+            if (CalcDirection(degree, 0, 11.25))
                 return DirectionEnum.North;
 
-            if (fB(degree, 11.25, 33.75))
+            if (CalcDirection(degree, 11.25, 33.75))
                 return DirectionEnum.NorthNorthEast;
 
-            if (fB(degree, 33.75, 56.25))
+            if (CalcDirection(degree, 33.75, 56.25))
                 return DirectionEnum.NorthEast;
 
-            if (fB(degree, 56.25, 78.75))
+            if (CalcDirection(degree, 56.25, 78.75))
                 return DirectionEnum.EastNorthEast;
 
-            if (fB(degree, 78.75, 101.25))
+            if (CalcDirection(degree, 78.75, 101.25))
                 return DirectionEnum.East;
 
-            if (fB(degree, 101.25, 123.75))
+            if (CalcDirection(degree, 101.25, 123.75))
                 return DirectionEnum.EastSouthEast;
 
-            if (fB(degree, 123.75, 146.25))
+            if (CalcDirection(degree, 123.75, 146.25))
                 return DirectionEnum.SouthEast;
 
-            if (fB(degree, 168.75, 191.25))
+            if (CalcDirection(degree, 168.75, 191.25))
                 return DirectionEnum.South;
 
-            if (fB(degree, 191.25, 213.75))
+            if (CalcDirection(degree, 191.25, 213.75))
                 return DirectionEnum.SouthSouthWest;
 
-            if (fB(degree, 213.75, 236.25))
+            if (CalcDirection(degree, 213.75, 236.25))
                 return DirectionEnum.SouthWest;
 
-            if (fB(degree, 236.25, 258.75))
+            if (CalcDirection(degree, 236.25, 258.75))
                 return DirectionEnum.WestSouthWest;
 
-            if (fB(degree, 258.75, 281.25))
+            if (CalcDirection(degree, 258.75, 281.25))
                 return DirectionEnum.West;
 
-            if (fB(degree, 281.25, 303.75))
+            if (CalcDirection(degree, 281.25, 303.75))
                 return DirectionEnum.WestNorthWest;
 
-            if (fB(degree, 303.75, 326.25))
+            if (CalcDirection(degree, 303.75, 326.25))
                 return DirectionEnum.NorthWest;
 
-            if (fB(degree, 326.25, 348.75))
+            if (CalcDirection(degree, 326.25, 348.75))
                 return DirectionEnum.NorthNorthWest;
 
             return DirectionEnum.Unknown;
         }
         
-        private static bool fB(double val, double min, double max)
+        private static bool CalcDirection(double val, double min, double max)
         {
             return min <= val && val <= max;
-        }
-    }
-    
-    public class Sun : Weather
-    {
-        public double All { get; }
-        
-        public Sun(JToken sunData) : base(sunData)
-        {
-            if (sunData is null)
-                throw new ArgumentNullException(nameof(sunData));
-
-            if (sunData.SelectToken("all") != null)
-                All = double.Parse(sunData.SelectToken("all").ToString(), CultureInfo.InvariantCulture);
         }
     }
 }

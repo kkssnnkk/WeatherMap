@@ -34,7 +34,6 @@
             this.lTheme = new System.Windows.Forms.Label();
             this.cbLocalization = new System.Windows.Forms.ComboBox();
             this.cbTheme = new System.Windows.Forms.ComboBox();
-            this.cbBold = new System.Windows.Forms.CheckBox();
             this.cbApi = new System.Windows.Forms.ComboBox();
             this.lApi = new System.Windows.Forms.Label();
             this.tbFontSize = new System.Windows.Forms.TrackBar();
@@ -96,27 +95,16 @@
             this.cbTheme.TabIndex = 5;
             this.cbTheme.Text = "Light";
             // 
-            // cbBold
-            // 
-            this.cbBold.AutoSize = true;
-            this.cbBold.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbBold.Location = new System.Drawing.Point(166, 103);
-            this.cbBold.Name = "cbBold";
-            this.cbBold.Size = new System.Drawing.Size(60, 25);
-            this.cbBold.TabIndex = 7;
-            this.cbBold.Text = "Bold";
-            this.cbBold.UseVisualStyleBackColor = true;
-            // 
             // cbApi
             // 
             this.cbApi.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbApi.FormattingEnabled = true;
-            this.cbApi.Items.AddRange(new object[] { "WeatherStack", "OpenWeatherMap" });
+            this.cbApi.Items.AddRange(new object[] { "OpenWeatherMap", "WeatherStack" });
             this.cbApi.Location = new System.Drawing.Point(12, 232);
             this.cbApi.Name = "cbApi";
             this.cbApi.Size = new System.Drawing.Size(214, 29);
             this.cbApi.TabIndex = 8;
-            this.cbApi.Text = "WeatherStack";
+            this.cbApi.Text = "OpenWeatherMap";
             // 
             // lApi
             // 
@@ -133,21 +121,19 @@
             // 
             this.tbFontSize.Location = new System.Drawing.Point(12, 101);
             this.tbFontSize.Maximum = 5;
-            this.tbFontSize.Minimum = 1;
             this.tbFontSize.Name = "tbFontSize";
-            this.tbFontSize.Size = new System.Drawing.Size(148, 37);
+            this.tbFontSize.Size = new System.Drawing.Size(214, 37);
             this.tbFontSize.TabIndex = 10;
-            this.tbFontSize.Value = 1;
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(238, 283);
             this.Controls.Add(this.tbFontSize);
             this.Controls.Add(this.lApi);
             this.Controls.Add(this.cbApi);
-            this.Controls.Add(this.cbBold);
             this.Controls.Add(this.cbTheme);
             this.Controls.Add(this.cbLocalization);
             this.Controls.Add(this.lTheme);
@@ -155,15 +141,14 @@
             this.Controls.Add(this.lLocalization);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(15, 15);
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.tbFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -174,7 +159,6 @@
         private System.Windows.Forms.Label lTheme;
         public System.Windows.Forms.ComboBox cbLocalization;
         public System.Windows.Forms.ComboBox cbTheme;
-        public System.Windows.Forms.CheckBox cbBold;
         public System.Windows.Forms.TrackBar tbFontSize;
         public System.Windows.Forms.ComboBox cbApi;
     }

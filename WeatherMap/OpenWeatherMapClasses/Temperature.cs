@@ -10,11 +10,11 @@ namespace WeatherMap
 
         public TemperatureObj(double temp)
         {
-            CelsiusCurrent = temp;
+            KelvinCurrent = temp;
 
-            ConvertCelsiusToKelvin(CelsiusCurrent);
+            CelsiusCurrent = ConvertKelvinToCelsius(KelvinCurrent);
 
-            ConvertCelsiusToFahrenheit(CelsiusCurrent);
+            FahrenheitCurrent = ConvertKelvinToFahrenheit(KelvinCurrent);
         }
 
         private static double ConvertCelsiusToKelvin(double celsius)
