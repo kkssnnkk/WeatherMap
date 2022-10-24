@@ -42,9 +42,9 @@ namespace WeatherMap
         // render map window 
         private void btnChooseOnMap_MouseClick(object sender, MouseEventArgs e)
         {
-            _mapForm.ShowDialog();
+            _mapForm.ShowDialog(); double lat = _mapForm.Coords.Lat; double lon = _mapForm.Coords.Lng;
             if (!_exceptions.ValidateCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)) return;
-            // client will dispose after api call
+
             UpdateInfo(JObject.Parse(_apiCalls.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
         }
         
@@ -54,7 +54,6 @@ namespace WeatherMap
             if (e.KeyData != Keys.Enter || !_exceptions.ValidateSearchQuery(cbSearch.Text))
                 return;
 
-            // client will dispose after api call
             UpdateInfo(JObject.Parse(_apiCalls.GetJsonResponseString(cbSearch.Text)));
         }
         

@@ -1,14 +1,22 @@
 ﻿using System.Linq;
 using Newtonsoft.Json.Linq;
-using System.Threading;
-using System.Diagnostics;
 using System.Windows.Forms;
 using System;
+using System.Security.Cryptography;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace WeatherMap
 {
     public class Exceptions
     {
+        public enum MemoryProtectionScope 
+        { 
+            CrossProcess = 1, 
+            SameLogon = 2, 
+            SameProcess = 0 
+        };
+
         public bool ValidateJsonAnswer(string jsonData)
         {
             return !JObject.Parse(jsonData).ContainsKey("success");
