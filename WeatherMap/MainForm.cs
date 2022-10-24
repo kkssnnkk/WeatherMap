@@ -85,6 +85,9 @@ namespace WeatherMap
         private void btnChooseOnMap_MouseClick(object sender, MouseEventArgs e)
         {
             _mapForm.ShowDialog();
+
+            if (!_exceptions.ValidateCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)) 
+                return;
             
             // client will dispose after api call
             switch (SettingsForm.cbApi.Text)
