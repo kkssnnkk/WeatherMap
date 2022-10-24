@@ -10,8 +10,8 @@ namespace WeatherMap
         private readonly MapForm _mapForm = new MapForm();
         private static readonly SettingsForm SettingsForm = new SettingsForm();
         
-        private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("f89ee63dd27c064a028c39511344acdb");
-        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
+        private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("");
+        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("");
         private readonly Exceptions _exceptions = new Exceptions();
 
         private float _lLocationFontSize;
