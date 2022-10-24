@@ -121,5 +121,10 @@ namespace WeatherMap
         {
             SettingsForm.ShowDialog();
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _exceptions.validateExit(e);
+        }
     }
 }
