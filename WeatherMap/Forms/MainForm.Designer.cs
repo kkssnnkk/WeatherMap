@@ -38,6 +38,9 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.settingsMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutAuthorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cbSearch = new System.Windows.Forms.ComboBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -123,7 +126,7 @@
             // 
             // menuStrip
             // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.settingsMenu });
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.settingsMenu, this.helpToolStripMenuItem });
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(283, 24);
@@ -137,6 +140,27 @@
             this.settingsMenu.Size = new System.Drawing.Size(61, 20);
             this.settingsMenu.Text = "Settings";
             this.settingsMenu.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.aboutAppToolStripMenuItem, this.aboutAuthorsToolStripMenuItem });
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutAppToolStripMenuItem
+            // 
+            this.aboutAppToolStripMenuItem.Name = "aboutAppToolStripMenuItem";
+            this.aboutAppToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutAppToolStripMenuItem.Text = "About app";
+            this.aboutAppToolStripMenuItem.Click += new System.EventHandler(this.aboutAppToolStripMenuItem_Click);
+            // 
+            // aboutAuthorsToolStripMenuItem
+            // 
+            this.aboutAuthorsToolStripMenuItem.Name = "aboutAuthorsToolStripMenuItem";
+            this.aboutAuthorsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutAuthorsToolStripMenuItem.Text = "About authors";
+            this.aboutAuthorsToolStripMenuItem.Click += new System.EventHandler(this.aboutAuthorsToolStripMenuItem_Click);
             // 
             // cbSearch
             // 
@@ -220,6 +244,10 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutAppToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutAuthorsToolStripMenuItem;
 
         private System.Windows.Forms.ToolStripMenuItem addTab;
         private System.Windows.Forms.ToolStripMenuItem removeTab;

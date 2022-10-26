@@ -13,7 +13,7 @@ namespace WeatherMap.Forms
         private static readonly SettingsForm SettingsForm = new SettingsForm();
         
         private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("");
-        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("");
+        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
         private readonly Exceptions _exceptions = new Exceptions();
 
         private static float _lLocationFontSize;
@@ -197,6 +197,16 @@ namespace WeatherMap.Forms
                     tabControl.TabPages.Remove(tabControl.SelectedTab);
                     break;
             }
+        }
+
+        private void aboutAppToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void aboutAuthorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
