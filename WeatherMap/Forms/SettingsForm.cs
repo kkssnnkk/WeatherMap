@@ -1,10 +1,10 @@
 ﻿using System.Windows.Forms;
 
-namespace WeatherMap
+namespace WeatherMap.Forms
 {
     public partial class SettingsForm : Form
     {
-        private readonly MainForm _mainForm = new MainForm();
+        private static readonly MainForm MainForm = new MainForm();
         
         public SettingsForm()
         {
@@ -13,7 +13,7 @@ namespace WeatherMap
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _mainForm.ApplySettings();
+            MainForm.ApplySettings();
         }
     }
 }

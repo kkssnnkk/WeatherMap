@@ -1,4 +1,4 @@
-﻿namespace WeatherMap
+﻿namespace WeatherMap.Forms
 {
     partial class MainForm
     {
@@ -176,19 +176,19 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.addTab, this.removeTab });
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(139, 48);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
             // addTab
             // 
             this.addTab.Name = "addTab";
-            this.addTab.Size = new System.Drawing.Size(152, 22);
+            this.addTab.Size = new System.Drawing.Size(138, 22);
             this.addTab.Text = "Add Tab";
             // 
             // removeTab
             // 
             this.removeTab.Name = "removeTab";
-            this.removeTab.Size = new System.Drawing.Size(152, 22);
+            this.removeTab.Size = new System.Drawing.Size(138, 22);
             this.removeTab.Text = "Remove Tab";
             // 
             // MainForm

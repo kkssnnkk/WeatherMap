@@ -6,7 +6,7 @@ using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 
-namespace WeatherMap
+namespace WeatherMap.Forms
 {
     public partial class MapForm : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace WeatherMap
+﻿namespace WeatherMap.Forms
 {
     partial class MapForm
     {

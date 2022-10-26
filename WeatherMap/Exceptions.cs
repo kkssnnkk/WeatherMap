@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿// ReSharper disable RedundantUsingDirective
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using System;

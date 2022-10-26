@@ -2,21 +2,23 @@
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using WeatherMap.OpenWeatherMapClasses;
+using WeatherMap.WeatherStackClasses;
 
-namespace WeatherMap
+namespace WeatherMap.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly MapForm _mapForm = new MapForm();
+        private static readonly MapForm MapForm = new MapForm();
         private static readonly SettingsForm SettingsForm = new SettingsForm();
         
         private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("");
         private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("");
         private readonly Exceptions _exceptions = new Exceptions();
 
-        private float _lLocationFontSize;
-        private float _lTempFontSize;
-        private float _lStatusFontSize;
+        private static float _lLocationFontSize;
+        private static float _lTempFontSize;
+        private static float _lStatusFontSize;
 
         public MainForm()
         {
@@ -25,9 +27,14 @@ namespace WeatherMap
         
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _lLocationFontSize = lLocation.Font.Size;
-            _lTempFontSize = lTemp.Font.Size;
+            _lLocationFontSize = lLocation.Font.Size; 
+            _lTempFontSize = lTemp.Font.Size; 
             _lStatusFontSize = lStatus.Font.Size;
+        }
+
+        private static Font ChangeFontSize(Control label, float newFontSize)
+        {
+            return new Font(label.Font.Name, newFontSize, label.Font.Style, label.Font.Unit, label.Font.GdiCharSet);
         }
 
         public void ApplySettings()
@@ -43,29 +50,29 @@ namespace WeatherMap
             switch (SettingsForm.tbFontSize.Value)
             {
                 case 1:
-                    lLocation.Font = new Font(lLocation.Font.Name, _lLocationFontSize + 1.0F, lLocation.Font.Style, lLocation.Font.Unit, 204);
-                    lTemp.Font = new Font(lTemp.Font.Name, _lTempFontSize + 1.0F, lTemp.Font.Style, lTemp.Font.Unit, 204);
-                    lStatus.Font = new Font(lStatus.Font.Name, _lStatusFontSize + 1.0F, lStatus.Font.Style, lStatus.Font.Unit, 204);
+                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 1.0F);
+                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 1.0F);
+                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 1.0F);
                     break;
                 case 2:
-                    lLocation.Font = new Font(lLocation.Font.Name, _lLocationFontSize + 2.0F, lLocation.Font.Style, lLocation.Font.Unit, 204);
-                    lTemp.Font = new Font(lTemp.Font.Name, _lTempFontSize + 2.0F, lTemp.Font.Style, lTemp.Font.Unit, 204);
-                    lStatus.Font = new Font(lStatus.Font.Name, _lStatusFontSize + 2.0F, lStatus.Font.Style, lStatus.Font.Unit, 204);
+                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 2.0F);
+                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 2.0F);
+                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 2.0F);
                     break;
                 case 3:
-                    lLocation.Font = new Font(lLocation.Font.Name, _lLocationFontSize + 3.0F, lLocation.Font.Style, lLocation.Font.Unit, 204); 
-                    lTemp.Font = new Font(lTemp.Font.Name, _lTempFontSize + 3.0F, lTemp.Font.Style, lTemp.Font.Unit, 204);
-                    lStatus.Font = new Font(lStatus.Font.Name, _lStatusFontSize + 3.0F, lStatus.Font.Style, lStatus.Font.Unit, 204);
+                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 3.0F);
+                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 3.0F);
+                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 3.0F);
                     break;
                 case 4:
-                    lLocation.Font = new Font(lLocation.Font.Name, _lLocationFontSize + 4.0F, lLocation.Font.Style, lLocation.Font.Unit, 204);
-                    lTemp.Font = new Font(lTemp.Font.Name, _lTempFontSize + 4.0F, lTemp.Font.Style, lTemp.Font.Unit, 204);
-                    lStatus.Font = new Font(lStatus.Font.Name, _lStatusFontSize + 4.0F, lStatus.Font.Style, lStatus.Font.Unit, 204);
+                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 4.0F);
+                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 4.0F);
+                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 4.0F);
                     break;
                 case 5:
-                    lLocation.Font = new Font(lLocation.Font.Name, _lLocationFontSize + 5.0F, lLocation.Font.Style, lLocation.Font.Unit, 204);
-                    lTemp.Font = new Font(lTemp.Font.Name, _lTempFontSize + 5.0F, lTemp.Font.Style, lTemp.Font.Unit, 204);
-                    lStatus.Font = new Font(lStatus.Font.Name, _lStatusFontSize + 5.0F, lStatus.Font.Style, lStatus.Font.Unit, 204);
+                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 5.0F);
+                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 5.0F);
+                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 5.0F);
                     break;
             }
 
@@ -110,19 +117,19 @@ namespace WeatherMap
         // render map window 
         private void btnChooseOnMap_MouseClick(object sender, MouseEventArgs e)
         {
-            _mapForm.ShowDialog();
+            MapForm.ShowDialog();
 
-            if (!_exceptions.ValidateCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)) 
+            if (!_exceptions.ValidateCoords(MapForm.Coords.Lat, MapForm.Coords.Lng)) 
                 return;
             
             // client will dispose after api call
             switch (SettingsForm.cbApi.Text)
             {
                 case "OpenWeatherMap":
-                    UpdateInfoFromOWM(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
+                    UpdateInfoFromOWM(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByCoords(MapForm.Coords.Lat, MapForm.Coords.Lng)));
                     break;
                 case "WeatherStack":
-                    UpdateInfoFromWS(new QueryResponse(_weatherStackApi.GetJsonResponseStringByCoords(_mapForm.Coords.Lat, _mapForm.Coords.Lng)));
+                    UpdateInfoFromWS(new QueryResponse(_weatherStackApi.GetJsonResponseStringByCoords(MapForm.Coords.Lat, MapForm.Coords.Lng)));
                     break;
             }
         }

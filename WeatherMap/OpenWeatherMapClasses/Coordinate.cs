@@ -1,6 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace WeatherMap
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable MemberCanBePrivate.Global
+
+namespace WeatherMap.OpenWeatherMapClasses
 {
     public class Coordinates
     {

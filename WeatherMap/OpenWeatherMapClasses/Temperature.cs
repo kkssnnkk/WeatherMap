@@ -1,6 +1,9 @@
 ﻿using System;
 
-namespace WeatherMap
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable MemberCanBePrivate.Global
+
+namespace WeatherMap.OpenWeatherMapClasses
 {
     public class TemperatureObj
     {
