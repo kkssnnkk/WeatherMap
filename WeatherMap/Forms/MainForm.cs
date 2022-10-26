@@ -163,7 +163,7 @@ namespace WeatherMap
 
         private void lLocation_TextChanged(object sender, EventArgs e)
         {
-            tabPage1.Text = lLocation.Text;
+            tabControl.SelectedTab.Text = lLocation.Text;
         }
 
         private void tabControl_MouseClick(object sender, MouseEventArgs e)
@@ -182,6 +182,11 @@ namespace WeatherMap
                     tabControl.TabPages.Add("New Tab");
                     break;
                 case "removeTab":
+                    if (tabControl.TabCount == 1)
+                    {
+                        MessageBox.Show(@"You cannot delete a single tab", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     tabControl.TabPages.Remove(tabControl.SelectedTab);
                     break;
             }
