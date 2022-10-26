@@ -11,7 +11,7 @@ namespace WeatherMap
         private static readonly SettingsForm SettingsForm = new SettingsForm();
         
         private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("");
-        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("");
+        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
         private readonly Exceptions _exceptions = new Exceptions();
 
         private float _lLocationFontSize;
@@ -163,7 +163,7 @@ namespace WeatherMap
 
         private void lLocation_TextChanged(object sender, EventArgs e)
         {
-            tabPage1.Text = lLocation.Text;
+            tabControl.SelectedTab.Text = lLocation.Text;
         }
 
         private void tabControl_MouseClick(object sender, MouseEventArgs e)
@@ -182,6 +182,11 @@ namespace WeatherMap
                     tabControl.TabPages.Add("New Tab");
                     break;
                 case "removeTab":
+                    if (tabControl.TabCount == 1)
+                    {
+                        MessageBox.Show(@"You cannot delete a single tab", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                     tabControl.TabPages.Remove(tabControl.SelectedTab);
                     break;
             }
