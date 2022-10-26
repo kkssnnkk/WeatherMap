@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lText = new System.Windows.Forms.Label();
             this.btnChooseOnMap = new System.Windows.Forms.Button();
-            this.groupBox = new System.Windows.Forms.GroupBox();
             this.lLocation = new System.Windows.Forms.Label();
             this.lStatus = new System.Windows.Forms.Label();
             this.lTemp = new System.Windows.Forms.Label();
@@ -39,16 +38,19 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.settingsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cbSearch = new System.Windows.Forms.ComboBox();
-            this.groupBox.SuspendLayout();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.menuStrip.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lText
             // 
             this.lText.AutoSize = true;
             this.lText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lText.Location = new System.Drawing.Point(11, 27);
+            this.lText.Location = new System.Drawing.Point(12, 27);
             this.lText.Margin = new System.Windows.Forms.Padding(3);
             this.lText.Name = "lText";
             this.lText.Size = new System.Drawing.Size(124, 21);
@@ -60,7 +62,7 @@
             this.btnChooseOnMap.AutoSize = true;
             this.btnChooseOnMap.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnChooseOnMap.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnChooseOnMap.Location = new System.Drawing.Point(136, 22);
+            this.btnChooseOnMap.Location = new System.Drawing.Point(137, 22);
             this.btnChooseOnMap.Name = "btnChooseOnMap";
             this.btnChooseOnMap.Size = new System.Drawing.Size(135, 31);
             this.btnChooseOnMap.TabIndex = 2;
@@ -68,36 +70,24 @@
             this.btnChooseOnMap.UseVisualStyleBackColor = true;
             this.btnChooseOnMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnChooseOnMap_MouseClick);
             // 
-            // groupBox
-            // 
-            this.groupBox.Controls.Add(this.lLocation);
-            this.groupBox.Controls.Add(this.lStatus);
-            this.groupBox.Controls.Add(this.lTemp);
-            this.groupBox.Controls.Add(this.pictureBox);
-            this.groupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox.Location = new System.Drawing.Point(0, 89);
-            this.groupBox.Name = "groupBox";
-            this.groupBox.Size = new System.Drawing.Size(283, 302);
-            this.groupBox.TabIndex = 4;
-            this.groupBox.TabStop = false;
-            // 
             // lLocation
             // 
             this.lLocation.AutoSize = true;
             this.lLocation.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lLocation.Location = new System.Drawing.Point(87, 19);
+            this.lLocation.Location = new System.Drawing.Point(78, 6);
             this.lLocation.Margin = new System.Windows.Forms.Padding(3);
             this.lLocation.Name = "lLocation";
             this.lLocation.Size = new System.Drawing.Size(90, 25);
             this.lLocation.TabIndex = 0;
             this.lLocation.Text = "lLocation";
             this.lLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lLocation.TextChanged += new System.EventHandler(this.lLocation_TextChanged);
             // 
             // lStatus
             // 
             this.lStatus.AutoSize = true;
             this.lStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lStatus.Location = new System.Drawing.Point(98, 127);
+            this.lStatus.Location = new System.Drawing.Point(94, 114);
             this.lStatus.Margin = new System.Windows.Forms.Padding(3);
             this.lStatus.Name = "lStatus";
             this.lStatus.Size = new System.Drawing.Size(59, 21);
@@ -108,7 +98,7 @@
             // 
             this.lTemp.AutoSize = true;
             this.lTemp.Font = new System.Drawing.Font("Segoe UI", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lTemp.Location = new System.Drawing.Point(46, 50);
+            this.lTemp.Location = new System.Drawing.Point(38, 37);
             this.lTemp.Margin = new System.Windows.Forms.Padding(3);
             this.lTemp.Name = "lTemp";
             this.lTemp.Size = new System.Drawing.Size(171, 71);
@@ -118,7 +108,7 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(93, 157);
+            this.pictureBox.Location = new System.Drawing.Point(94, 144);
             this.pictureBox.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(64, 64);
@@ -147,19 +137,42 @@
             // 
             this.cbSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbSearch.FormattingEnabled = true;
-            this.cbSearch.Location = new System.Drawing.Point(11, 54);
+            this.cbSearch.Location = new System.Drawing.Point(12, 54);
             this.cbSearch.Name = "cbSearch";
             this.cbSearch.Size = new System.Drawing.Size(260, 29);
             this.cbSearch.TabIndex = 2;
             this.cbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbSearch_KeyDown);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(12, 89);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(260, 263);
+            this.tabControl1.TabIndex = 6;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.pictureBox);
+            this.tabPage1.Controls.Add(this.lStatus);
+            this.tabPage1.Controls.Add(this.lLocation);
+            this.tabPage1.Controls.Add(this.lTemp);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(252, 237);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "New Tab";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 391);
+            this.ClientSize = new System.Drawing.Size(283, 364);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.cbSearch);
-            this.Controls.Add(this.groupBox);
             this.Controls.Add(this.btnChooseOnMap);
             this.Controls.Add(this.lText);
             this.Controls.Add(this.menuStrip);
@@ -172,18 +185,21 @@
             this.Text = "WeatherMap";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.groupBox.ResumeLayout(false);
-            this.groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+
         private System.Windows.Forms.Label lText;
         private System.Windows.Forms.Button btnChooseOnMap;
-        private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Label lTemp;
         private System.Windows.Forms.Label lLocation;
         private System.Windows.Forms.MenuStrip menuStrip;

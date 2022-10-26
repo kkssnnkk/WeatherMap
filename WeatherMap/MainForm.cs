@@ -11,7 +11,7 @@ namespace WeatherMap
         private static readonly SettingsForm SettingsForm = new SettingsForm();
         
         private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("");
-        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("");
+        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
         private readonly Exceptions _exceptions = new Exceptions();
 
         private float _lLocationFontSize;
@@ -80,7 +80,7 @@ namespace WeatherMap
 
         private void CenterElement(Label label)
         {
-            label.Location = new Point(groupBox.Width / 2 - label.Width / 2, label.Location.Y);
+            label.Location = new Point(tabPage1.Width / 2 - label.Width / 2, label.Location.Y);
         }
         
         private void UpdateInfoFromOWM(QueryResponse queryResponse)
@@ -159,6 +159,11 @@ namespace WeatherMap
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _exceptions.ValidateExit(e);
+        }
+
+        private void lLocation_TextChanged(object sender, EventArgs e)
+        {
+            tabPage1.Text = lLocation.Text;
         }
     }
 }
