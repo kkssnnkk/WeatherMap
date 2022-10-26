@@ -11,7 +11,7 @@ namespace WeatherMap
         private static readonly SettingsForm SettingsForm = new SettingsForm();
         
         private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("");
-        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
+        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("");
         private readonly Exceptions _exceptions = new Exceptions();
 
         private float _lLocationFontSize;
@@ -164,6 +164,27 @@ namespace WeatherMap
         private void lLocation_TextChanged(object sender, EventArgs e)
         {
             tabPage1.Text = lLocation.Text;
+        }
+
+        private void tabControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+                return;
+
+            contextMenuStrip1.Show((Control)sender, e.Location, ToolStripDropDownDirection.Default);
+        }
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch (e.ClickedItem.Name)
+            {
+                case "addTab":
+                    tabControl.TabPages.Add("New Tab");
+                    break;
+                case "removeTab":
+                    tabControl.TabPages.Remove(tabControl.SelectedTab);
+                    break;
+            }
         }
     }
 }
