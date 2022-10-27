@@ -126,7 +126,9 @@
             // 
             // menuStrip
             // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.settingsMenu, this.helpToolStripMenuItem });
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsMenu,
+            this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(283, 24);
@@ -143,7 +145,9 @@
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.aboutAppToolStripMenuItem, this.aboutAuthorsToolStripMenuItem });
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutAppToolStripMenuItem,
+            this.aboutAuthorsToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -151,14 +155,14 @@
             // aboutAppToolStripMenuItem
             // 
             this.aboutAppToolStripMenuItem.Name = "aboutAppToolStripMenuItem";
-            this.aboutAppToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutAppToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.aboutAppToolStripMenuItem.Text = "About app";
             this.aboutAppToolStripMenuItem.Click += new System.EventHandler(this.aboutAppToolStripMenuItem_Click);
             // 
             // aboutAuthorsToolStripMenuItem
             // 
             this.aboutAuthorsToolStripMenuItem.Name = "aboutAuthorsToolStripMenuItem";
-            this.aboutAuthorsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutAuthorsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.aboutAuthorsToolStripMenuItem.Text = "About authors";
             this.aboutAuthorsToolStripMenuItem.Click += new System.EventHandler(this.aboutAuthorsToolStripMenuItem_Click);
             // 
@@ -198,7 +202,9 @@
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.addTab, this.removeTab });
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addTab,
+            this.removeTab});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(139, 48);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
@@ -243,6 +249,7 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -259,13 +266,13 @@
 
         private System.Windows.Forms.Label lText;
         private System.Windows.Forms.Button btnChooseOnMap;
-        private System.Windows.Forms.Label lTemp;
-        private System.Windows.Forms.Label lLocation;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem settingsMenu;
-        private System.Windows.Forms.ComboBox cbSearch;
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Label lStatus;
+        public System.Windows.Forms.Label lTemp;
+        public System.Windows.Forms.Label lLocation;
+        public System.Windows.Forms.PictureBox pictureBox;
+        public System.Windows.Forms.Label lStatus;
+        public System.Windows.Forms.ComboBox cbSearch;
     }
     #endregion
 }

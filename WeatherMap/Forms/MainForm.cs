@@ -14,7 +14,9 @@ namespace WeatherMap.Forms
         
         private readonly WeatherStackApi _weatherStackApi = new WeatherStackApi("");
         private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
+
         private readonly Exceptions _exceptions = new Exceptions();
+
 
         private static float _lLocationFontSize;
         private static float _lTempFontSize;
@@ -23,13 +25,46 @@ namespace WeatherMap.Forms
         public MainForm()
         {
             InitializeComponent();
+            setAppStateFromLastSave();
         }
         
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _lLocationFontSize = lLocation.Font.Size; 
-            _lTempFontSize = lTemp.Font.Size; 
+            _lLocationFontSize = lLocation.Font.Size;
+            _lTempFontSize = lTemp.Font.Size;
             _lStatusFontSize = lStatus.Font.Size;
+        }
+
+        // read app last state
+        public void setAppStateFromLastSave() 
+        {
+            var data = _exceptions.getAppLastState();
+
+            // this
+            cbSearch.Text = data.seacrh_field;
+            lTemp.Text = data.temperature;
+            lLocation.Text = data.location;
+            lStatus.Text = data.status;
+        }
+
+        // save app state
+        public void saveData() 
+        {
+            var data = _exceptions.getSaveDataStructure();
+
+            // this
+            data.status = lStatus.Text;
+            data.temperature = lTemp.Text;
+            data.location = lLocation.Text;
+            data.seacrh_field = cbSearch.Text;
+
+            // settings 
+            data.api = SettingsForm.cbApi.Text;
+            data.language = SettingsForm.cbLocalization.Text;
+            data.font_size = SettingsForm.tbFontSize.Value;
+            data.theme = SettingsForm.cbTheme.Text;
+
+            _exceptions.saveAppState(data);
         }
 
         private static Font ChangeFontSize(Control label, float newFontSize)
@@ -165,6 +200,7 @@ namespace WeatherMap.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            saveData();
             _exceptions.ValidateExit(e);
         }
 
