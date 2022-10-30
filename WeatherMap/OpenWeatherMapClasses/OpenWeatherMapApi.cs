@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace WeatherMap.OpenWeatherMapClasses
+namespace WeatherMap
 {
     public class OpenWeatherMapApi
     {

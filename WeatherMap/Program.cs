@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using WeatherMap.Forms;
 
 namespace WeatherMap
 {
     internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Головна точка входу для застосунку.
         /// </summary>
         [STAThread]
         static void Main()

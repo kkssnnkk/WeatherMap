@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-// ReSharper disable UnusedAutoPropertyAccessor.Global
-// ReSharper disable MemberCanBePrivate.Global
-
-namespace WeatherMap.OpenWeatherMapClasses
+namespace WeatherMap
 {
     public class QueryResponse
     {
@@ -52,8 +49,7 @@ namespace WeatherMap.OpenWeatherMapClasses
             
             ValidRequest = true;
             Coordinates = new Coordinates(jsonData.SelectToken("coord"));
-            
-            // ReSharper disable once PossibleNullReferenceException
+
             foreach (var weather in jsonData.SelectToken("weather"))
                 WeatherList.Add(new Weather(weather));
 
