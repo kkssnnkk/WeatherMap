@@ -6,6 +6,7 @@ namespace WeatherMap.Forms
     {
         private static readonly MainForm MainForm = new MainForm();
         private readonly Exceptions _exceptions = new Exceptions();
+        private readonly AutoSave _autoSave = new AutoSave();
 
         public SettingsForm()
         {
@@ -20,10 +21,9 @@ namespace WeatherMap.Forms
 
         public void setDataFromLastSave()
         {
-            var data = _exceptions.getAppLastState();
+            var data = _autoSave.getAppLastState();
 
             // settings
-            cbApi.Text = data.api;
             cbLocalization.Text = data.language;
             tbFontSize.Value = data.font_size;
             cbTheme.Text = data.theme;
