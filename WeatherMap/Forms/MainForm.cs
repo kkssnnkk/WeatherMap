@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -12,11 +13,11 @@ namespace WeatherMap.Forms
         private static readonly MapForm MapForm = new MapForm();
         private static readonly SettingsForm SettingsForm = new SettingsForm();
         
-        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
+        private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b94d08549e7914e8dfa8e2f597724316");
 
         private readonly Exceptions _exceptions = new Exceptions();
+        private readonly Algorithms _algorithms = new Algorithms();
         private readonly AutoSave _autoSave = new AutoSave();
-
 
         private static float _lLocationFontSize;
         private static float _lTempFontSize;
@@ -265,6 +266,17 @@ namespace WeatherMap.Forms
             {
                 _exceptions.msgError();
             }
+        }
+
+        private void cbSearch_TextChanged(object sender, EventArgs e)
+        {
+           List<string> Cities = _algorithms.FindMatches(cbSearch.Text);
+           foreach (var i in Cities)
+           {
+               cbSearch.Items.Add(i);
+               if (cbSearch.Items.Count == 5)
+                   break;
+           } 
         }
     }
 }
