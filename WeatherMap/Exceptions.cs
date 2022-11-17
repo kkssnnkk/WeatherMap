@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using System;
 using System.Threading;
+using WeatherMap.OpenWeatherMapClasses;
 
 
 namespace WeatherMap
@@ -20,15 +21,15 @@ namespace WeatherMap
         {
         }
     }
-    public class FormNotOpened : Exception
+    public class FormNotOpenedException : Exception
     {
-        public FormNotOpened()
+        public FormNotOpenedException()
         {
         }
-        public FormNotOpened(string message) : base(message)
+        public FormNotOpenedException(string message) : base(message)
         {
         }
-        public FormNotOpened(string message, Exception inner) : base(message, inner)
+        public FormNotOpenedException(string message, Exception inner) : base(message, inner)
         {
         }
     }
@@ -56,20 +57,24 @@ namespace WeatherMap
         {
         }
     }
-
-
+    public class BadResponseException : Exception
+    {
+        public BadResponseException()
+        {
+        }
+        public BadResponseException(string message) : base(message)
+        {
+        }
+        public BadResponseException(string message, Exception inner) : base(message, inner)
+        {
+        }
+    }
 
     public class Exceptions
     {
-        // rebuild
-        public bool ValidateJsonAnswer(string jsonData)
+        public void ValidateJsonAnswer(QueryResponse jsonData)
         {
-            return !JObject.Parse(jsonData).ContainsKey("success");
-        }
-        // rebuild
-        public bool ValidateJsonAnswer(JObject jsonData)
-        {
-            return !jsonData.ContainsKey("success");
+            if (!jsonData.ValidRequest) throw new BadResponseException("404 Not found.");
         }
 
         public void ValidateSearchQuery(string text)
@@ -97,16 +102,24 @@ namespace WeatherMap
                 }
                 catch (Exception) 
                 {
-                    throw new AppOnCloseExcption();
+                    throw new AppOnCloseExcption("App can not be closed.");
                 }
             }
             else 
                 e.Cancel = true;
         }
 
-        public void msgError()
+        public DialogResult openFormSafely(Form f) 
         {
-            MessageBox.Show(@"Unexpected error", @"Press retry or cancel.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                if (f.ShowDialog() == DialogResult.OK) return DialogResult.OK;
+                else return DialogResult.Cancel;
+            }
+            catch (Exception) 
+            {
+                throw new FormNotOpenedException("Form not opened.");
+            }
         }
     }
 }
