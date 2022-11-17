@@ -11,7 +11,10 @@ namespace WeatherMap.Forms
     {
         private static readonly MapForm MapForm = new MapForm();
         private static readonly SettingsForm SettingsForm = new SettingsForm();
-        
+        private static readonly AboutAuthorsForm AboutAuthorsForm = new AboutAuthorsForm();
+        private static readonly AboutAppForm AboutAppForm = new AboutAppForm();
+
+
         private readonly OpenWeatherMapApi _openWeatherMapApi = new OpenWeatherMapApi("b71815a25d967af19c11e1da4ebad8b8");
 
         private readonly Exceptions _exceptions = new Exceptions();
@@ -126,6 +129,16 @@ namespace WeatherMap.Forms
         
         private void UpdateInfoFromOWM(QueryResponse queryResponse)
         {
+            try
+            {
+                _exceptions.ValidateJsonAnswer(queryResponse);
+            }
+            catch (BadResponseException exc) 
+            {
+                showErrorMsg(exc.Message, @"Request Error");
+                return;
+            }
+
             lLocation.Text = queryResponse.Name;
             CenterElement(lLocation);
             
@@ -141,11 +154,12 @@ namespace WeatherMap.Forms
         {
             try 
             {
-                MapForm.ShowDialog();
+                // openFormSafely returns DialogResult if needed
+                _exceptions.openFormSafely(MapForm);
             } 
-            catch (FormNotOpened) 
+            catch (FormNotOpenedException exc) 
             {
-                _exceptions.msgError();
+                showErrorMsg(exc.Message, "Error");
             }
 
             try
@@ -157,8 +171,6 @@ namespace WeatherMap.Forms
                 return;
             }
             
-
-
             UpdateInfoFromOWM(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByCoords(MapForm.Coords.Lat, MapForm.Coords.Lng)));    
         }
         
@@ -191,11 +203,12 @@ namespace WeatherMap.Forms
         {
             try
             {
-                SettingsForm.ShowDialog();
+                // openFormSafely returns DialogResult if needed
+                _exceptions.openFormSafely(SettingsForm);
             }
-            catch (FormNotOpened)
+            catch (FormNotOpenedException exc)
             {
-                _exceptions.msgError();
+                showErrorMsg(exc.Message, "Error");
             }
         }
 
@@ -206,9 +219,10 @@ namespace WeatherMap.Forms
             {
                 _exceptions.ValidateExit(e);
             }
-            catch (AppOnCloseExcption)
+            catch (AppOnCloseExcption exc)
             {
-                _exceptions.msgError();
+                showErrorMsg(exc.Message, @"Warning");
+                return;
             }
         }
 
@@ -235,7 +249,7 @@ namespace WeatherMap.Forms
                 case "removeTab":
                     if (tabControl.TabCount == 1)
                     {
-                        MessageBox.Show(@"You cannot delete a single tab", @"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        showErrorMsg(@"You cannot delete a single tab", @"Warning");
                         return;
                     }
                     tabControl.TabPages.Remove(tabControl.SelectedTab);
@@ -247,11 +261,12 @@ namespace WeatherMap.Forms
         {
             try
             {
-                // [FORM_NAME].ShowDialog();
+                // openFormSafely returns DialogResult if needed
+                _exceptions.openFormSafely(AboutAppForm);
             }
-            catch (FormNotOpened)
+            catch (FormNotOpenedException exc)
             {
-                _exceptions.msgError();
+                showErrorMsg(exc.Message, "Error");
             }
         }
 
@@ -259,12 +274,18 @@ namespace WeatherMap.Forms
         {
             try
             {
-                // [FORM_NAME].ShowDialog();
+                // openFormSafely returns DialogResult if needed
+                _exceptions.openFormSafely(AboutAuthorsForm);
             }
-            catch (FormNotOpened)
+            catch (FormNotOpenedException exc)
             {
-                _exceptions.msgError();
+                showErrorMsg(exc.Message, "Error");
             }
+        }
+
+        private void showErrorMsg(string text1, string text2) 
+        {
+            MessageBox.Show(text1, text2, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }
