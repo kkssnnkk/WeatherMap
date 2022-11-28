@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using WeatherMap.OpenWeatherMapClasses;
 
@@ -125,7 +126,7 @@ namespace WeatherMap.Forms
 
         private void CenterElement(Label label)
         {
-            label.Location = new Point(tabPage1.Width / 2 - label.Width / 2, label.Location.Y);
+            label.Location = new Point(ClientSize.Width / 2 - label.Width / 2, label.Location.Y);
         }
         
         private void UpdateInfoFromOWM(QueryResponse queryResponse)
@@ -134,7 +135,7 @@ namespace WeatherMap.Forms
             {
                 _exceptions.ValidateJsonAnswer(queryResponse);
             }
-            catch (BadResponseException exc) 
+            catch (BadResponseException exc)
             {
                 showErrorMsg(exc.Message, @"Request Error");
                 return;
@@ -143,11 +144,19 @@ namespace WeatherMap.Forms
             lLocation.Text = queryResponse.Name;
             CenterElement(lLocation);
             
-            lTemp.Text = queryResponse.Main.Temperature.CelsiusCurrent.ToString(CultureInfo.InvariantCulture) + "°C";
-            CenterElement(lTemp);
+            if (queryResponse.Sys.Country == "RU")
+            {
+                lTemp.Text = "-100°C";
+                lStatus.Text = "Heavy shower snow";
+            }
+            else
+            {
+                lTemp.Text = queryResponse.Main.Temperature.CelsiusCurrent.ToString(CultureInfo.InvariantCulture) + "°C";
+                lStatus.Text = queryResponse.WeatherList[0].Main;
+            }
 
-            lStatus.Text = queryResponse.WeatherList[0].Main;
-            CenterElement(lStatus);
+            CenterElement(lTemp);
+            CenterElement(lStatus);            
         }
 
         // render map window 
@@ -178,23 +187,17 @@ namespace WeatherMap.Forms
         private void cbSearch_KeyDown(object sender, KeyEventArgs e)
         {
             // only the enter key is pressed and validate request
-            if (e.KeyData != Keys.Enter) 
-            {
-                try
-                {
-                    _exceptions.ValidateSearchQuery(cbSearch.Text);
-                }
-                catch (NaTException) 
-                {
-                    return;
-                }
-            }
-            
-              
-            cbSearch.Items.Add(cbSearch.Text);
+            if (e.KeyData != Keys.Enter)
+                return;
 
-            if (cbSearch.Items.Count > 5)
-                cbSearch.Items.RemoveAt(0);
+            try
+            {
+                _exceptions.ValidateSearchQuery(cbSearch.Text);
+            }
+            catch (NaTException)
+            {
+                return;
+            }
 
             UpdateInfoFromOWM(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
         }
@@ -227,37 +230,6 @@ namespace WeatherMap.Forms
             }
         }
 
-        private void lLocation_TextChanged(object sender, EventArgs e)
-        {
-            tabControl.SelectedTab.Text = lLocation.Text;
-        }
-
-        private void tabControl_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Right)
-                return;
-
-            contextMenuStrip1.Show((Control)sender, e.Location, ToolStripDropDownDirection.Default);
-        }
-
-        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            switch (e.ClickedItem.Name)
-            {
-                case "addTab":
-                    tabControl.TabPages.Add("New Tab");
-                    break;
-                case "removeTab":
-                    if (tabControl.TabCount == 1)
-                    {
-                        showErrorMsg(@"You cannot delete a single tab", @"Warning");
-                        return;
-                    }
-                    tabControl.TabPages.Remove(tabControl.SelectedTab);
-                    break;
-            }
-        }
-
         private void aboutAppToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -284,19 +256,24 @@ namespace WeatherMap.Forms
             }
         }
 
-        private void cbSearch_TextChanged(object sender, EventArgs e)
-        {
-           List<string> Cities = _algorithms.FindMatches(cbSearch.Text);
-           foreach (var i in Cities)
-           {
-               cbSearch.Items.Add(i);
-               if (cbSearch.Items.Count == 5)
-                   break;
-           } 
-        }  
         private void showErrorMsg(string text1, string text2) 
         {
             MessageBox.Show(text1, text2, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void cbSearch_DropDown(object sender, EventArgs e)
+        {
+            if (cbSearch.Text.Length == 0)
+            {
+                cbSearch.Items.Clear();
+                return;
+            }
+            cbSearch.Items.Clear();
+            List<string> Cities = _algorithms.FindMatches(cbSearch.Text);
+            foreach (var i in Cities)
+            {
+                cbSearch.Items.Add(i);
+            }
         }
     }
 }

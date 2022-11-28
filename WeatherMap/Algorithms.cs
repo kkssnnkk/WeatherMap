@@ -61,6 +61,5 @@ namespace WeatherMap
 
             return result;
         }
-
     }
 }
