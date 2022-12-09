@@ -62,9 +62,25 @@ namespace WeatherMap.Forms
             data.seacrh_field = cbSearch.Text;
 
             // settings 
-            // data.language = SettingsForm.cbLocalization.Text;
-            // data.font_size = SettingsForm.tbFontSize.Value;
-            // data.theme = SettingsForm.cbTheme.Text;
+            if (SettingsForm.rbUkrainian.Checked) 
+            {
+                data.language = "ua";
+            }
+            if (SettingsForm.rbEnglish.Checked)
+            {
+                data.language = "us";
+            }
+
+            data.font_size = SettingsForm.tbFontSize.Value;
+
+            if (SettingsForm.rbLight.Checked)
+            {
+                data.theme = "Light";
+            }
+            if (SettingsForm.rbDark.Checked)
+            {
+                data.theme = "Dark";
+            }
 
             _autoSave.saveAppState(data);
         }

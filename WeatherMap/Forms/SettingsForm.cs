@@ -16,9 +16,29 @@
             var data = _autoSave.getAppLastState();
 
             // settings
-            // cbLocalization.Text = data.language;
-            // tbFontSize.Value = data.font_size;
-            // cbTheme.Text = data.theme;
+            if (data.language == "us") 
+            {
+                rbEnglish.Checked = true;
+                rbUkrainian.Checked = false;
+            }
+            if (data.language == "ua")
+            {
+                rbEnglish.Checked = false;
+                rbUkrainian.Checked = true;
+            }
+
+            if (data.theme == "Dark") 
+            {
+                rbLight.Checked = false;
+                rbDark.Checked = true;
+            }
+            if (data.theme == "Light")
+            {
+                rbLight.Checked = true;
+                rbDark.Checked = false;
+            }
+
+            tbFontSize.Value = data.font_size;
         }
 
         private void rbLight_CheckedChanged(object sender, System.EventArgs e)
