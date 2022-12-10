@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System;
 using System.Threading;
 using WeatherMap.OpenWeatherMapClasses;
-
+using System.Net.NetworkInformation;
 
 namespace WeatherMap
 {
@@ -70,6 +70,19 @@ namespace WeatherMap
         }
     }
 
+    public class ConnectionRefusedException : Exception
+    {
+        public ConnectionRefusedException()
+        {
+        }
+        public ConnectionRefusedException(string message) : base(message)
+        {
+        }
+        public ConnectionRefusedException(string message, Exception inner) : base(message, inner)
+        {
+        }
+    }
+
     public class Exceptions
     {
         public void ValidateJsonAnswer(QueryResponse jsonData)
@@ -77,21 +90,26 @@ namespace WeatherMap
             if (!jsonData.ValidRequest) throw new BadResponseException("404 Not found.");
         }
 
-        public void ValidateSearchQuery(string text)
+        public void checkCityCorrectnessByResponceCOD(QueryResponse jsonData)
         {
-            if (!text.Any()) throw new NaTException("Pls, check your search query."); 
+            if (jsonData.Cod != 200) throw new BadResponseException("Cod " + jsonData.Cod.ToString());
         }
 
-        public void ValidateCoords(double lat, double lon) 
+        public void ValidateSearchQuery(string text)
         {
-            if ((Convert.ToInt16(lat) == 85 && Convert.ToInt16(lon) == -180) || (Convert.ToInt16(lat) == -85 && Convert.ToInt16(lon) == -180) 
-            || (Convert.ToInt16(lat) == -85 && Convert.ToInt16(lon) == 180) || (Convert.ToInt16(lat) == 85 && Convert.ToInt16(lon) == 180)) 
+            if (!text.Any()) throw new NaTException("Pls, check your search query.");
+        }
+
+        public void ValidateCoords(double lat, double lon)
+        {
+            if ((Convert.ToInt16(lat) == 85 && Convert.ToInt16(lon) == -180) || (Convert.ToInt16(lat) == -85 && Convert.ToInt16(lon) == -180)
+            || (Convert.ToInt16(lat) == -85 && Convert.ToInt16(lon) == 180) || (Convert.ToInt16(lat) == 85 && Convert.ToInt16(lon) == 180))
             {
                 throw new CoordsException("Coords are not valid or no data for this coords provided.");
             }
         }
 
-        public void ValidateExit(FormClosingEventArgs e) 
+        public void ValidateExit(FormClosingEventArgs e)
         {
             if (MessageBox.Show(@"Exit?", @"Closing app...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -100,25 +118,38 @@ namespace WeatherMap
                     Thread.Sleep(1000);
                     Environment.Exit(0);
                 }
-                catch (Exception) 
+                catch (Exception)
                 {
                     throw new AppOnCloseExcption("App can not be closed.");
                 }
             }
-            else 
+            else
                 e.Cancel = true;
         }
 
-        public DialogResult openFormSafely(Form f) 
+        public DialogResult openFormSafely(Form f)
         {
             try
             {
                 if (f.ShowDialog() == DialogResult.OK) return DialogResult.OK;
                 else return DialogResult.Cancel;
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 throw new FormNotOpenedException("Form not opened.");
+            }
+        }
+
+        public void connectionIsAlive()
+        {
+            try
+            {
+                if (new Ping().Send("www.google.com", 10000).Status != IPStatus.Success)
+                    throw new ConnectionRefusedException("Check your internet connection.");
+            }
+            catch (Exception)
+            {
+                throw new ConnectionRefusedException("Check your internet connection.");
             }
         }
     }
