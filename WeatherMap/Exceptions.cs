@@ -1,11 +1,9 @@
 ﻿// ReSharper disable RedundantUsingDirective
 using System.Linq;
-using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using System;
 using System.Threading;
 using WeatherMap.OpenWeatherMapClasses;
-
 
 namespace WeatherMap
 {
@@ -45,15 +43,15 @@ namespace WeatherMap
         {
         }
     }
-    public class AppOnCloseExcption : Exception
+    public class AppOnCloseException : Exception
     {
-        public AppOnCloseExcption()
+        public AppOnCloseException()
         {
         }
-        public AppOnCloseExcption(string message) : base(message)
+        public AppOnCloseException(string message) : base(message)
         {
         }
-        public AppOnCloseExcption(string message, Exception inner) : base(message, inner)
+        public AppOnCloseException(string message, Exception inner) : base(message, inner)
         {
         }
     }
@@ -102,19 +100,20 @@ namespace WeatherMap
                 }
                 catch (Exception) 
                 {
-                    throw new AppOnCloseExcption("App can not be closed.");
+                    throw new AppOnCloseException("App can not be closed.");
                 }
             }
-            else 
+            else
+            {
                 e.Cancel = true;
+            }
         }
 
-        public DialogResult openFormSafely(Form f) 
+        public DialogResult OpenFormSafely(Form f) 
         {
             try
             {
-                if (f.ShowDialog() == DialogResult.OK) return DialogResult.OK;
-                else return DialogResult.Cancel;
+                return f.ShowDialog() == DialogResult.OK ? DialogResult.OK : DialogResult.Cancel;
             }
             catch (Exception) 
             {

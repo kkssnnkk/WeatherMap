@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using WeatherMap.OpenWeatherMapClasses;
-
 
 namespace WeatherMap.Forms
 {
@@ -21,213 +19,187 @@ namespace WeatherMap.Forms
         private readonly Algorithms _algorithms = new Algorithms();
         private readonly AutoSave _autoSave = new AutoSave();
 
-        private static float _lLocationFontSize;
-        private static float _lTempFontSize;
-        private static float _lStatusFontSize;
-
         public MainForm()
         {
             InitializeComponent();
-            setAppStateFromLastSave();
         }
         
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _lLocationFontSize = lLocation.Font.Size;
-            _lTempFontSize = lTemp.Font.Size;
-            _lStatusFontSize = lStatus.Font.Size;
+            SetAppStateFromLastSave();
+            ApplySettings();
+            UpdateInfoFromApi(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
         }
 
         // read app last state
-        public void setAppStateFromLastSave() 
+        public void SetAppStateFromLastSave() 
         {
-            var data = _autoSave.getAppLastState();
+            var data = _autoSave.GetAppLastState();
+            
+            cbSearch.Text = data.searchField;
 
-            // this
-            cbSearch.Text = data.seacrh_field;
-            lTemp.Text = data.temperature;
-            lLocation.Text = data.location;
-            lStatus.Text = data.status;
+            SettingsForm.rbEnglish.Checked   = data.english;
+            SettingsForm.rbUkrainian.Checked = data.ukrainian;
+            SettingsForm.rbLight.Checked     = data.light;
+            SettingsForm.rbDark.Checked      = data.dark;
+            SettingsForm.tbFontSize.Value    = data.fontSize;
         }
 
         // save app state
-        public void saveData() 
+        public void SaveData() 
         {
-            var data = _autoSave.getSaveDataStructure();
+            var data = _autoSave.GetSaveDataStructure();
+            
+            data.searchField = cbSearch.Text;
 
-            // this
-            data.status = lStatus.Text;
-            data.temperature = lTemp.Text;
-            data.location = lLocation.Text;
-            data.seacrh_field = cbSearch.Text;
+            data.english   = SettingsForm.rbEnglish.Checked;
+            data.ukrainian = SettingsForm.rbUkrainian.Checked;
+            data.light     = SettingsForm.rbLight.Checked;
+            data.dark      = SettingsForm.rbDark.Checked;
+            data.fontSize  = SettingsForm.tbFontSize.Value;
 
-            // settings 
-            // data.language = SettingsForm.cbLocalization.Text;
-            // data.font_size = SettingsForm.tbFontSize.Value;
-            // data.theme = SettingsForm.cbTheme.Text;
-
-            _autoSave.saveAppState(data);
-        }
-
-        private static Font ChangeFontSize(Control label, float newFontSize)
-        {
-            return new Font(label.Font.Name, newFontSize, label.Font.Style, label.Font.Unit, label.Font.GdiCharSet);
+            _autoSave.SaveAppState(data);
         }
 
         public void ApplySettings()
         {
-            /*switch (SettingsForm.cbLocalization.Text)
+            if (SettingsForm.rbEnglish.Checked)
             {
-                case "English":
-                    break;
-                case "Ukrainian":
-                    break;
+
+            }
+            else if (SettingsForm.rbUkrainian.Checked)
+            {
+
             }
 
             switch (SettingsForm.tbFontSize.Value)
             {
                 case 1:
-                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 1.0F);
-                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 1.0F);
-                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 1.0F);
+                    lLocation.Font = new Font(lLocation.Font.Name, 10F);
+                    lTemp.Font     = new Font(lTemp.Font.Name, 36F);
+                    lStatus.Font   = new Font(lStatus.Font.Name, 8F);
                     break;
                 case 2:
-                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 2.0F);
-                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 2.0F);
-                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 2.0F);
+                    lLocation.Font = new Font(lLocation.Font.Name, 12F);
+                    lTemp.Font     = new Font(lTemp.Font.Name, 38F);
+                    lStatus.Font   = new Font(lStatus.Font.Name, 10F);
                     break;
                 case 3:
-                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 3.0F);
-                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 3.0F);
-                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 3.0F);
+                    lLocation.Font = new Font(lLocation.Font.Name, 14F);
+                    lTemp.Font     = new Font(lTemp.Font.Name, 40F);
+                    lStatus.Font   = new Font(lStatus.Font.Name, 12F);
                     break;
                 case 4:
-                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 4.0F);
-                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 4.0F);
-                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 4.0F);
+                    lLocation.Font = new Font(lLocation.Font.Name, 16F);
+                    lTemp.Font     = new Font(lTemp.Font.Name, 42F);
+                    lStatus.Font   = new Font(lStatus.Font.Name, 14F);
                     break;
                 case 5:
-                    lLocation.Font = ChangeFontSize(lLocation, _lLocationFontSize + 5.0F);
-                    lTemp.Font = ChangeFontSize(lTemp, _lTempFontSize + 5.0F);
-                    lStatus.Font = ChangeFontSize(lStatus, _lStatusFontSize + 5.0F);
+                    lLocation.Font = new Font(lLocation.Font.Name, 18F);
+                    lTemp.Font     = new Font(lTemp.Font.Name, 44F);
+                    lStatus.Font   = new Font(lStatus.Font.Name, 16F);
                     break;
-            }*/
+            }
 
             if (SettingsForm.rbLight.Checked)
             {
                 /*  Main Form  */
-                ActiveForm.ForeColor =
-                lText.ForeColor =
-                btnChooseOnMap.ForeColor =
-                cbSearch.ForeColor =
-                lLocation.ForeColor =
-                lTemp.ForeColor =
-                lStatus.ForeColor =
-                settingsMenu.ForeColor =
-                helpMenu.ForeColor =
-                aboutAppMenu.ForeColor =
-                aboutAuthorsMenu.ForeColor =
-                Color.FromArgb(255, 0, 0, 0);
+                ForeColor =              lText.ForeColor =            btnChooseOnMap.ForeColor =
+                cbSearch.ForeColor =     lLocation.ForeColor =        lTemp.ForeColor =
+                lStatus.ForeColor =      settingsMenu.ForeColor =     helpMenu.ForeColor =
+                aboutAppMenu.ForeColor = aboutAuthorsMenu.ForeColor = Color.FromArgb(255, 0, 0, 0);
 
-                ActiveForm.BackColor =
-                lText.BackColor =
-                lLocation.BackColor =
-                lTemp.BackColor =
-                lStatus.BackColor =
-                settingsMenu.BackColor =
-                menuStrip.BackColor =
-                menuStrip.BackColor =
-                helpMenu.BackColor =
-                aboutAppMenu.BackColor =
-                aboutAuthorsMenu.BackColor =
-                Color.FromArgb(255, 240, 240, 240);
+                BackColor =              lText.BackColor =            lLocation.BackColor =
+                lTemp.BackColor =        lStatus.BackColor =          settingsMenu.BackColor =
+                menuStrip.BackColor =    menuStrip.BackColor =        helpMenu.BackColor =
+                aboutAppMenu.BackColor = aboutAuthorsMenu.BackColor = Color.FromArgb(255, 240, 240, 240);
                 
                 btnChooseOnMap.BackColor = cbSearch.BackColor = Color.FromArgb(255, 255, 255, 255);
 
                 /*  Settings Form  */
-                SettingsForm.ForeColor = 
-                SettingsForm.gbLanguage.ForeColor = 
-                SettingsForm.rbEnglish.ForeColor = 
-                SettingsForm.rbUkrainian.ForeColor =
-                SettingsForm.gbFontSize.ForeColor =
-                SettingsForm.tbFontSize.ForeColor =
-                SettingsForm.gbTheme.ForeColor =
-                SettingsForm.rbLight.ForeColor =
-                SettingsForm.rbDark.ForeColor =
-                Color.FromArgb(255, 0, 0, 0);
+                SettingsForm.ForeColor =            SettingsForm.gbLanguage.ForeColor =  
+                SettingsForm.rbEnglish.ForeColor =  SettingsForm.rbUkrainian.ForeColor = 
+                SettingsForm.gbFontSize.ForeColor = SettingsForm.tbFontSize.ForeColor =
+                SettingsForm.gbTheme.ForeColor =    SettingsForm.rbLight.ForeColor = 
+                SettingsForm.rbDark.ForeColor =     Color.FromArgb(255, 0, 0, 0);
 
-                SettingsForm.BackColor = 
-                SettingsForm.gbLanguage.BackColor = 
-                SettingsForm.rbEnglish.BackColor = 
-                SettingsForm.rbUkrainian.BackColor = 
-                SettingsForm.gbFontSize.BackColor = 
-                SettingsForm.tbFontSize.BackColor = 
-                SettingsForm.gbTheme.BackColor = 
-                SettingsForm.rbLight.BackColor = 
-                SettingsForm.rbDark.BackColor = 
-                Color.FromArgb(255, 240, 240, 240);
+                SettingsForm.BackColor =            SettingsForm.gbLanguage.BackColor = 
+                SettingsForm.rbEnglish.BackColor =  SettingsForm.rbUkrainian.BackColor = 
+                SettingsForm.gbFontSize.BackColor = SettingsForm.tbFontSize.BackColor = 
+                SettingsForm.gbTheme.BackColor =    SettingsForm.rbLight.BackColor = 
+                SettingsForm.rbDark.BackColor =     Color.FromArgb(255, 240, 240, 240);
+
+                /* About authors */
+                AboutAuthorsForm.ForeColor        = AboutAuthorsForm.pictureBox1.ForeColor =
+                AboutAuthorsForm.label1.ForeColor = AboutAuthorsForm.label2.ForeColor =
+                AboutAuthorsForm.label3.ForeColor = AboutAuthorsForm.label4.ForeColor =
+                AboutAuthorsForm.label5.ForeColor = Color.FromArgb(255, 0, 0, 0);
+
+                AboutAuthorsForm.BackColor        = AboutAuthorsForm.pictureBox1.BackColor =
+                AboutAuthorsForm.label1.BackColor = AboutAuthorsForm.label2.BackColor =
+                AboutAuthorsForm.label3.BackColor = AboutAuthorsForm.label4.BackColor =
+                AboutAuthorsForm.label5.BackColor = Color.FromArgb(255, 240, 240, 240);
+
+                /* About app */
+                AboutAppForm.ForeColor        = AboutAppForm.pictureBox1.ForeColor =
+                AboutAppForm.label1.ForeColor = Color.FromArgb(255, 0, 0, 0);
+                 
+                AboutAppForm.BackColor        = AboutAppForm.pictureBox1.BackColor =
+                AboutAppForm.label1.BackColor = Color.FromArgb(255, 240, 240, 240);
             }
             else if (SettingsForm.rbDark.Checked)
             {
                 /*  Main Form  */
-                ActiveForm.ForeColor =
-                lText.ForeColor =
-                btnChooseOnMap.ForeColor =
-                cbSearch.ForeColor =
-                lLocation.ForeColor =
-                lTemp.ForeColor =
-                lStatus.ForeColor =
-                settingsMenu.ForeColor = 
-                helpMenu.ForeColor =
-                aboutAppMenu.ForeColor =
-                aboutAuthorsMenu.ForeColor =
-                Color.FromArgb(255, 255, 255, 255);
+                ForeColor =              lText.ForeColor =            btnChooseOnMap.ForeColor =
+                cbSearch.ForeColor =     lLocation.ForeColor =        lTemp.ForeColor =
+                lStatus.ForeColor =      settingsMenu.ForeColor =     helpMenu.ForeColor =
+                aboutAppMenu.ForeColor = aboutAuthorsMenu.ForeColor = Color.FromArgb(255, 255, 255, 255);
 
-                ActiveForm.BackColor =
-                lText.BackColor =
-                btnChooseOnMap.BackColor =
-                cbSearch.BackColor =
-                lLocation.BackColor =
-                lTemp.BackColor =
-                lStatus.BackColor =
-                settingsMenu.BackColor =
-                helpMenu.BackColor =
-                menuStrip.BackColor =
-                aboutAppMenu.BackColor =
-                aboutAuthorsMenu.BackColor =
+                BackColor =           lText.BackColor =        btnChooseOnMap.BackColor =
+                cbSearch.BackColor =  lLocation.BackColor =    lTemp.BackColor =
+                lStatus.BackColor =   settingsMenu.BackColor = helpMenu.BackColor =
+                menuStrip.BackColor = aboutAppMenu.BackColor = aboutAuthorsMenu.BackColor =
                 Color.FromArgb(255, 36, 36, 36);
 
                 /*  Settings Form  */
-                SettingsForm.ForeColor =
-                SettingsForm.gbLanguage.ForeColor =
-                SettingsForm.rbEnglish.ForeColor =
-                SettingsForm.rbUkrainian.ForeColor =
-                SettingsForm.gbFontSize.ForeColor =
-                SettingsForm.tbFontSize.ForeColor =
-                SettingsForm.gbTheme.ForeColor =
-                SettingsForm.rbLight.ForeColor =
-                SettingsForm.rbDark.ForeColor =
-                Color.FromArgb(255, 255, 255, 255);
+                SettingsForm.ForeColor =            SettingsForm.gbLanguage.ForeColor =
+                SettingsForm.rbEnglish.ForeColor =  SettingsForm.rbUkrainian.ForeColor =
+                SettingsForm.gbFontSize.ForeColor = SettingsForm.tbFontSize.ForeColor =
+                SettingsForm.gbTheme.ForeColor =    SettingsForm.rbLight.ForeColor =
+                SettingsForm.rbDark.ForeColor =     Color.FromArgb(255, 255, 255, 255);
 
-                SettingsForm.BackColor =
-                SettingsForm.gbLanguage.BackColor =
-                SettingsForm.rbEnglish.BackColor =
-                SettingsForm.rbUkrainian.BackColor =
-                SettingsForm.gbFontSize.BackColor =
-                SettingsForm.tbFontSize.BackColor =
-                SettingsForm.gbTheme.BackColor =
-                SettingsForm.rbLight.BackColor =
-                SettingsForm.rbDark.BackColor =
-                Color.FromArgb(255, 36, 36, 36);
+                SettingsForm.BackColor =            SettingsForm.gbLanguage.BackColor =
+                SettingsForm.rbEnglish.BackColor =  SettingsForm.rbUkrainian.BackColor =
+                SettingsForm.gbFontSize.BackColor = SettingsForm.tbFontSize.BackColor =
+                SettingsForm.gbTheme.BackColor =    SettingsForm.rbLight.BackColor =
+                SettingsForm.rbDark.BackColor =     Color.FromArgb(255, 36, 36, 36);
+
+                /* About authors */
+                AboutAuthorsForm.ForeColor        = AboutAuthorsForm.pictureBox1.ForeColor = 
+                AboutAuthorsForm.label1.ForeColor = AboutAuthorsForm.label2.ForeColor = 
+                AboutAuthorsForm.label3.ForeColor = AboutAuthorsForm.label4.ForeColor = 
+                AboutAuthorsForm.label5.ForeColor = Color.FromArgb(255, 255, 255, 255);
+
+                AboutAuthorsForm.BackColor        = AboutAuthorsForm.pictureBox1.BackColor =
+                AboutAuthorsForm.label1.BackColor = AboutAuthorsForm.label2.BackColor =
+                AboutAuthorsForm.label3.BackColor = AboutAuthorsForm.label4.BackColor = 
+                AboutAuthorsForm.label5.BackColor = Color.FromArgb(255, 36, 36, 36);
+
+                /* About app */
+                AboutAppForm.ForeColor        = AboutAppForm.pictureBox1.ForeColor = 
+                AboutAppForm.label1.ForeColor = Color.FromArgb(255, 255, 255, 255);
+
+                AboutAppForm.BackColor = AboutAppForm.pictureBox1.BackColor =
+                AboutAppForm.label1.BackColor = Color.FromArgb(255, 36, 36, 36);
             }
         }
 
-        private void CenterElement(Label label)
+        private void CenterElement(Control control)
         {
-            label.Location = new Point(ClientSize.Width / 2 - label.Width / 2, label.Location.Y);
+            control.Location = new Point(ClientSize.Width / 2 - control.Width / 2, control.Location.Y);
         }
         
-        private void UpdateInfoFromOWM(QueryResponse queryResponse)
+        private void UpdateInfoFromApi(QueryResponse queryResponse)
         {
             try
             {
@@ -235,24 +207,24 @@ namespace WeatherMap.Forms
             }
             catch (BadResponseException exc)
             {
-                showErrorMsg(exc.Message, @"Request Error");
+                ShowErrorMsg(exc.Message, @"Request Error");
                 return;
             }
 
             lLocation.Text = queryResponse.Name;
-            CenterElement(lLocation);
-            
+
             if (queryResponse.Sys.Country == "RU")
             {
-                lTemp.Text = "-100°C";
-                lStatus.Text = "Heavy shower snow";
+                lTemp.Text = @"-100°C";
+                lStatus.Text = @"Heavy shower snow";
             }
             else
             {
-                lTemp.Text = Math.Round(queryResponse.Main.Temperature.CelsiusCurrent).ToString(CultureInfo.InvariantCulture) + "°C";
+                lTemp.Text = Math.Round(queryResponse.Main.Temperature.CelsiusCurrent).ToString(CultureInfo.InvariantCulture) + @"°C";
                 lStatus.Text = queryResponse.WeatherList[0].Main;
             }
 
+            CenterElement(lLocation);
             CenterElement(lTemp);
             CenterElement(lStatus);            
         }
@@ -263,11 +235,11 @@ namespace WeatherMap.Forms
             try 
             {
                 // openFormSafely returns DialogResult if needed
-                _exceptions.openFormSafely(MapForm);
+                _exceptions.OpenFormSafely(MapForm);
             } 
             catch (FormNotOpenedException exc) 
             {
-                showErrorMsg(exc.Message, "Error");
+                ShowErrorMsg(exc.Message, "Error");
             }
 
             try
@@ -279,14 +251,16 @@ namespace WeatherMap.Forms
                 return;
             }
             
-            UpdateInfoFromOWM(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByCoords(MapForm.Coords.Lat, MapForm.Coords.Lng)));    
+            UpdateInfoFromApi(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByCoords(MapForm.Coords.Lat, MapForm.Coords.Lng)));    
         }
         
         private void cbSearch_KeyDown(object sender, KeyEventArgs e)
         {
             // only the enter key is pressed and validate request
             if (e.KeyData != Keys.Enter)
+            {
                 return;
+            }
 
             try
             {
@@ -297,7 +271,7 @@ namespace WeatherMap.Forms
                 return;
             }
 
-            UpdateInfoFromOWM(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
+            UpdateInfoFromApi(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
         }
         
         // render settings window
@@ -306,11 +280,11 @@ namespace WeatherMap.Forms
             try
             {
                 // openFormSafely returns DialogResult if needed
-                _exceptions.openFormSafely(SettingsForm);
+                _exceptions.OpenFormSafely(SettingsForm);
             }
             catch (FormNotOpenedException exc)
             {
-                showErrorMsg(exc.Message, "Error");
+                ShowErrorMsg(exc.Message, "Error");
             }
 
             ApplySettings();
@@ -318,15 +292,14 @@ namespace WeatherMap.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveData();
+            SaveData();
             try
             {
                 _exceptions.ValidateExit(e);
             }
-            catch (AppOnCloseExcption exc)
+            catch (AppOnCloseException exc)
             {
-                showErrorMsg(exc.Message, @"Warning");
-                return;
+                ShowErrorMsg(exc.Message, @"Warning");
             }
         }
 
@@ -335,11 +308,11 @@ namespace WeatherMap.Forms
             try
             {
                 // openFormSafely returns DialogResult if needed
-                _exceptions.openFormSafely(AboutAppForm);
+                _exceptions.OpenFormSafely(AboutAppForm);
             }
             catch (FormNotOpenedException exc)
             {
-                showErrorMsg(exc.Message, "Error");
+                ShowErrorMsg(exc.Message, "Error");
             }
         }
 
@@ -348,34 +321,33 @@ namespace WeatherMap.Forms
             try
             {
                 // openFormSafely returns DialogResult if needed
-                _exceptions.openFormSafely(AboutAuthorsForm);
+                _exceptions.OpenFormSafely(AboutAuthorsForm);
             }
             catch (FormNotOpenedException exc)
             {
-                showErrorMsg(exc.Message, "Error");
+                ShowErrorMsg(exc.Message, "Error");
             }
         }
 
-        private void showErrorMsg(string text1, string text2) 
+        private static void ShowErrorMsg(string text, string caption) 
         {
-            MessageBox.Show(text1, text2, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void cbSearch_DropDown(object sender, EventArgs e)
         {
+            cbSearch.Items.Clear();
+            
             if (cbSearch.Text.Length == 0)
             {
-                cbSearch.Items.Clear();
                 return;
             }
             
-            cbSearch.Items.Clear();
-            
-            List<string> Cities = _algorithms.FindMatches(cbSearch.Text);
+            var cities = _algorithms.FindMatches(cbSearch.Text);
 
-            foreach (var i in Cities)
+            foreach (var item in cities)
             {
-                cbSearch.Items.Add(i);
+                cbSearch.Items.Add(item);
             }
         }
     }

@@ -2,66 +2,63 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-
 namespace WeatherMap
 {
     internal class AutoSave
     {
-        DataToSave dataToSave = new DataToSave();
-        BinaryFormatter formatter = new BinaryFormatter();
+        private DataToSave _dataToSave;
+        private readonly BinaryFormatter _formatter = new BinaryFormatter();
 
 
-        [SerializableAttribute]
+        [Serializable]
         public struct DataToSave
         {
-            public string language;
-            public string theme;
-            public int font_size;
-
-            public string temperature;
-            public string location;
-            public string status;
-            public string seacrh_field;
+            public string searchField;
+            public bool english;
+            public bool ukrainian;
+            public bool light;
+            public bool dark;
+            public int fontSize;
         };
 
-        public DataToSave getSaveDataStructure() { return dataToSave; }
+        public DataToSave GetSaveDataStructure() { return _dataToSave; }
 
-        public void saveAppState(DataToSave data_to_save)
+        public void SaveAppState(DataToSave dataToSave)
         {
-            dataToSave = data_to_save;
+            _dataToSave = dataToSave;
             try
             {
                 byte[] data;
 
-                using (MemoryStream ms = new MemoryStream())
+                using (var ms = new MemoryStream())
                 {
-                    formatter.Serialize(ms, dataToSave);
+                    _formatter.Serialize(ms, _dataToSave);
                     ms.Seek(0, SeekOrigin.Begin);
                     data = ms.ToArray();
                 }
 
-                using (BinaryWriter bin = new BinaryWriter(File.Open("configuration.bin", FileMode.OpenOrCreate), System.Text.Encoding.UTF8, false))
+                using (var bin = new BinaryWriter(File.Open("configuration.bin", FileMode.OpenOrCreate), System.Text.Encoding.UTF8, false))
                 {
                     bin.Write(data);
                 }
             }
-            catch (Exception) { Console.WriteLine("Error writing config file."); }
+            catch (Exception) { Console.WriteLine(@"Error writing config file."); }
         }
 
-        public DataToSave getAppLastState()
+        public DataToSave GetAppLastState()
         {
             try
             {
-                FileStream fs = File.Open("configuration.bin", FileMode.Open);
-                object data = formatter.Deserialize(fs);
-                dataToSave = (DataToSave)data;
+                var fs = File.Open("configuration.bin", FileMode.Open);
+                var data = _formatter.Deserialize(fs);
+                _dataToSave = (DataToSave)data;
                 fs.Flush();
                 fs.Close();
                 fs.Dispose();
             }
-            catch (Exception) { Console.WriteLine("Error reading config file."); }
+            catch (Exception) { Console.WriteLine(@"Error reading config file."); }
 
-            return dataToSave;
+            return _dataToSave;
         }
     }
 }

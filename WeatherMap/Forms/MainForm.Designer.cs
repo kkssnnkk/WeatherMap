@@ -61,7 +61,7 @@
             this.btnChooseOnMap.AutoSize = true;
             this.btnChooseOnMap.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnChooseOnMap.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnChooseOnMap.Location = new System.Drawing.Point(141, 27);
+            this.btnChooseOnMap.Location = new System.Drawing.Point(135, 27);
             this.btnChooseOnMap.Name = "btnChooseOnMap";
             this.btnChooseOnMap.Size = new System.Drawing.Size(135, 31);
             this.btnChooseOnMap.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             this.lLocation.AutoSize = true;
             this.lLocation.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lLocation.Location = new System.Drawing.Point(90, 99);
+            this.lLocation.Location = new System.Drawing.Point(93, 99);
             this.lLocation.Margin = new System.Windows.Forms.Padding(3);
             this.lLocation.Name = "lLocation";
             this.lLocation.Size = new System.Drawing.Size(90, 25);
@@ -85,7 +85,7 @@
             // 
             this.lStatus.AutoSize = true;
             this.lStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lStatus.Location = new System.Drawing.Point(100, 207);
+            this.lStatus.Location = new System.Drawing.Point(109, 207);
             this.lStatus.Margin = new System.Windows.Forms.Padding(3);
             this.lStatus.Name = "lStatus";
             this.lStatus.Size = new System.Drawing.Size(59, 21);
@@ -96,7 +96,7 @@
             // 
             this.lTemp.AutoSize = true;
             this.lTemp.Font = new System.Drawing.Font("Segoe UI", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lTemp.Location = new System.Drawing.Point(52, 130);
+            this.lTemp.Location = new System.Drawing.Point(55, 130);
             this.lTemp.Margin = new System.Windows.Forms.Padding(3);
             this.lTemp.Name = "lTemp";
             this.lTemp.Size = new System.Drawing.Size(171, 71);
@@ -106,7 +106,7 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(95, 237);
+            this.pictureBox.Location = new System.Drawing.Point(107, 237);
             this.pictureBox.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(64, 64);
@@ -124,7 +124,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(283, 24);
+            this.menuStrip.Size = new System.Drawing.Size(280, 24);
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -149,14 +149,14 @@
             // aboutAppMenu
             // 
             this.aboutAppMenu.Name = "aboutAppMenu";
-            this.aboutAppMenu.Size = new System.Drawing.Size(180, 22);
+            this.aboutAppMenu.Size = new System.Drawing.Size(150, 22);
             this.aboutAppMenu.Text = "About app";
             this.aboutAppMenu.Click += new System.EventHandler(this.aboutAppToolStripMenuItem_Click);
             // 
             // aboutAuthorsMenu
             // 
             this.aboutAuthorsMenu.Name = "aboutAuthorsMenu";
-            this.aboutAuthorsMenu.Size = new System.Drawing.Size(180, 22);
+            this.aboutAuthorsMenu.Size = new System.Drawing.Size(150, 22);
             this.aboutAuthorsMenu.Text = "About authors";
             this.aboutAuthorsMenu.Click += new System.EventHandler(this.aboutAuthorsToolStripMenuItem_Click);
             // 
@@ -171,7 +171,7 @@
             this.cbSearch.MaxDropDownItems = 5;
             this.cbSearch.Name = "cbSearch";
             this.cbSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cbSearch.Size = new System.Drawing.Size(260, 29);
+            this.cbSearch.Size = new System.Drawing.Size(259, 29);
             this.cbSearch.TabIndex = 2;
             this.cbSearch.DropDown += new System.EventHandler(this.cbSearch_DropDown);
             this.cbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbSearch_KeyDown);
@@ -180,7 +180,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 312);
+            this.ClientSize = new System.Drawing.Size(280, 312);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.lStatus);
             this.Controls.Add(this.lTemp);

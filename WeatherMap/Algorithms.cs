@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Numerics;
 
 namespace WeatherMap
 {
     public class Algorithms
     {
-        private List<string> Cities;
+        private readonly List<string> _cities;
 
         public Algorithms()
         {
-            Cities = ReadData();
+            _cities = ReadData();
         }
-        private List<string> ReadData ()
+
+        private static List<string> ReadData ()
         {
-            List<string> Cities = new List<string>(); 
-            string Filepath = $"{Environment.CurrentDirectory}\\worldcities.csv";
-            using (var Reader = new StreamReader(Filepath)) 
+            var cities = new List<string>(); 
+            var filepath = $"{Environment.CurrentDirectory}\\worldcities.csv";
+            using (var reader = new StreamReader(filepath)) 
             { 
-                string line,city = String.Empty ,country = String.Empty;
-                int counter = 0;
-                while ((line = Reader.ReadLine()) != null) 
+                string line,city = string.Empty ,country = string.Empty;
+                var counter = 0;
+                while ((line = reader.ReadLine()) != null) 
                 {
                     foreach (var item in line)
                     {
@@ -36,30 +36,21 @@ namespace WeatherMap
                             country += item;
                     }
              
-                    Cities.Add(city + ", " + country);
-                    city = String.Empty; 
-                    country = String.Empty;
+                    cities.Add(city + ", " + country);
+                    city = string.Empty; 
+                    country = string.Empty;
                     counter = 0;
                 }
 
             }
 
-            Cities.RemoveAt(0);
-            return Cities;
+            cities.RemoveAt(0);
+            return cities;
         }
 
         public List<string> FindMatches(string search)
         {
-            List<string> result = new List<string>();
-            foreach (var item in Cities)
-            {
-                if (item.StartsWith(search))
-                {
-                    result.Add(item);
-                }
-            }
-
-            return result;
+            return _cities.Where(item => item.StartsWith(search)).ToList();
         }
     }
 }

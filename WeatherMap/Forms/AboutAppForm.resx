@@ -117,4 +117,65 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>This plugin is designed to monitor the weather in a specific city, you can set a city by name, or you can select it on the map by pressing the "Choose on map" button on the top of the home screen. You can select specific coordinates with the right mouse button, and with the left mouse button you can move around the map. 
+You can also change the settings by opening the window with the button at the top of the main menu. 
+The settings include the following items:
+- Localization (English, Ukrainian);
+- Change themes (Light, Dark).
+Weather data is collected from OpenWeatherMap service.
+Pleasant use.</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wAAADsABataJCQAACpZJREFUeF7tXduOFkUQ5hF8BB6BR/DKIyCCclhZ3GVFUFAXRE1UBIOCeFrEYNRI
+        jNEoeiEoN0oUFFAhqKgQ0SgnE4KocRNFvPCirW+2m53/p/7DzFT39MzUl3wJyz8zXV1V3V3V3dMzpW64
+        YfDeqcQrieuIY8S9luNE0ydxrbsPz8Cz8MypthhFLLCGgYGyGjkvnXMkTmHFUIQCKR0tfNQagTNQGYQs
+        kEl7CB+AYq2CjxA5A8REyKjOIAFS4iziDiKn6CoQss+y1VH0A1LYFUS0oFNETqlVJOqCOl1hq6loB5RD
+        RGAVIpAri6gb6qiO4ABlWKXU2fDtVEcASAEY4+vU1Wcl6t68GIEqjag+pjSubEIXzcgaqKLo+jglKEk3
+        Vk31A1UOrb4KeXzZhI7q1RtQhYaITQryihK6GrLqqzaoIlhM4Sqp7M0xq8bqgYRHeqddfnFCh9VKF0ng
+        acQmp3fShC6nWfXGDQhK1PFentBp3E4AAa2gXAWUxRmvE5BgiPQ5oZXyjCtDIIHQ8jlBlf4YR08AQYja
+        7Ydn+cMBBLCCcAIq/bM8J6CCkedrqlc+YYPw8wRUqE7yxMMj1ixhQAV6nd4dXjJqHl+93Lyz/nbz2bOL
+        zemXFrHEb7gG1+Ie7lkNYphpYyrIW7p374q7za4NS1hj90Pci2dwz24I/aaHVACWdMWDPhjtoydHWKPm
+        IZ7VUEeAbfwtJdPDRcf9+cOrzGtrl7JGlCCejTK4smtMP/EAPVh0Jw8M0218lyLKaKATyO4sogei6+cK
+        ysU7l91jjm+9lTWYD6IslMnJUmPKDQX0MLENnGiNIY3viDIb1hPsteYrBnoQtm5zBWRmqG6/Exs4HBTb
+        ck4PEJ3t8xnw9UvIwMlWUxabJaSbxQI/pGWcQcpgw1LEfAEh3YjWL5bzS+b5RQlZOBlrStgwey9AN9Wy
+        9TtqL9AFdINo6y8yveuLkImTtabM1gvQxXiXnXtQZmKRhjNADGzYAtKoNW9v0MVikT9W6jjlh+aPWxea
+        I2MLzMEn55kDG282ux+dbR5Y3qyMwJq3O+hCsbwfxHItZ5AQPLZlIDH4R+vnJAZv55bVi1iZa8ze8wJ0
+        keiZPKEnfk6+OGi+ema+2fvYTazRD7+2xpz45G1z/odD5tyJ700vHD3+szn45VHz1rsfmoc2vMDWsULc
+        Yc3Mgy4QnfMHOSP5oDM819q/2f6EOfvNHvPfvxesWfPjwj8Xzcf7DpsNm19l61sBdl4joB/Fgj9HzljS
+        RFffbvg9mwaTli5h9E6AM6BnGFj6MFv3SNk5GKQfxff5cQaTIlr955vmBjd8OyrmCPx+AfpBvPsHOcNJ
+        EFF9+ziPrj6k4dsBR6jI0HD5MED/Kd79g5zxihLGT3f5aPUI6mIBgsbIe4PLhwH6Ty+HNnEGLMLvNg+0
+        tPovXlplLo6ft6qPB+d//9OMPvQMq5MIePleAeYiEe5/Wm7zR3vLh/HL7PJ7IeYhwZp9AvQfOHKdvbAo
+        33xkiDVmVrYb/9jO562a48dzL29ndVMyJ4+6pz+8Hd22bsUwa9AsRLT/6YbJgA8tv2qIcBJpcoWQ/vB2
+        aOOCgeIzgYefntdi/Ji7/U7AcBBZTDAZB9AfYku/7bxmzhKzc33+OOD487dcMj6i/b/OnbIqrR4QGEaU
+        HYw743vJ/x2vnbvM3DWSfxhI5/pnDu6yqqwukCJyeiqJU70GgOD0BXeZq25cbHZvzN4LpFM+LOLUBRFl
+        Bld6DQDBmQtXJg6QpxdIt/4Yc/28wFDA6aoEroMDeD/J89qblyZOsO3B/lPCdOuvUsrXL7B2wOkqMMfg
+        AN6PbZ8xcE/iALPmLu57Yii9yFOn1u+ArIDTVWDuDeIA4DU33X7JCb7fyhvd8acXBmvd+h0imCBKHMBb
+        Cpim6wXAkVuHuzpBuvuPaZFHGifPnGV1FZDjcADuBy+8bu4dl5ygfTjAVC929GDDppvy3f/cMquq+mLJ
+        ysdZXYViUAeYuXBVMjGUdoIXH2iN9tOsc/fv8MobO1ldhWJQBwDhBFfPHrnkBODI4CKz7b6JoA9TvdjR
+        8+fpY5Wc8s2KsieGgjsAOOOW0RYnmL1whXl9+3tm/I/frFqag7KzgVIcAHTDAQz/94V/rDqaiTLXB0pz
+        AAQ/iIIV5S4Vl+IAWBZF16eYQJlrA8EdAN6uxm9FmdPCQR1AWz6PRjgAAh2sgim6A3HR+x/sCzYswAGC
+        TAWjUopsQIPxvF6QTAV7XwxCxK/ID/QKnvYThlkNxNu0imJA7OShN0gcwOuGEIz9CjkIO0GyIcTrljAI
+        rJCF4HCQbAnzuikUix0KWQhuL082hXrdFq6pnx8IzR1MvCZO//CWCir8AEFhwV5g4sUQgP7wlgko/KFg
+        QNjyapiXQFDzf78ouJmk5eVQb4Ggwh8wDHA675OTr4cDzAUiVPgFp/N+aM0+CfpPL3HAr+d/t6IqfIDT
+        eR9kj4jxckjUZ4e+tqIqfCDntnL2kCgv8wFPbdlmRVX4AKfzPsifFko/iB8UiR2/Cj/AZlpO5z3Y+cOS
+        9KP4MHD1nNvM7j0HrMgKSWB45XTeg12PihUfBvBq+ODS+63ICklgeOV03oPdPyhJF4geF+9OCHl3124r
+        tkIC6P4xvHI678Lux8UDdJHoByPwAoh7+0dTQjnghRq8XcXpvAv7+5AkXSj2yRgQB0XBCe5YtbbxbwFJ
+        AA0JDQrDK6fvDuzvkzEAXSwaDLpzgsB1G+v/xq9voCFBlxheOX13YKaPRol+Ng5Mnw2gPUF+IPCDDtH9
+        Y3jldM0Qtsz28Ui6QXSFMHktnFLCtBP8fPIXWy1FL6DBOOOD189bzuq5A7N/PpZuEu8F2l8LB/Xt4N5A
+        Q3HdPoiG5LX1O9CN4vsEpi+4u8UBQHc+gGYJrYA+0q3eEQ2J020H5vt4NEA3i34+3pHrCRxXr9mUzBl8
+        e+wHq4ZmAa0d9UewzOknY+BX7PPxAD1AdF7AEU6QPi9I2Z1oMBmND/aX9/cCPcjbnkEEM516A+UE0VAy
+        dvvg5Wv+eUEP87p1HAFN4gipLEE5EezlaPWO3ef8s4Ie6PUNIkccKIk5A3eyaNOI1o76I1jm9NMn8wd+
+        3UAPFt8voBRn5/X+oqCHYyjw9hKJsjBhG9muvx1UwFCqQGVcHLJm8gsqyPs3BpSZOWbNEwZUoMYD8dDf
+        uN8JVKiXWUJlZhaf7csLKngaUYPC8gjdT7PmKAcQwArCCaj0x/KN7wBBUoIpwzAO4zuQQJoehmOYdC8r
+        SDAdDvwynm6/EyCgFZSrgDI/4ze+AwQlaoooR+iyGsZ3IIExT6CTRcUJHZaT50uAhNdp4/wMO73rC1QR
+        ZAgaF/RP6CrOSD8vqEJYStYhoTehI79LumWCKhdkZ1FF6WcnT2ygiqI38H5MfYUIXdS31XcCVRpbzpuc
+        LqLuMlu3qwpSANJFDAtNChJRV9S5uumdNKAMq5Q6O4IavhegHCLOJ6jT0IC6oE5q+CwghSFGED2zKDAh
+        e7PHeAmQEpE1oAVVYR4BMkLW5kX1IQDFWgXHlEZCFjV6GSCl46h7BFYwQogAEmWgLJTZeuS6onyQUdBD
+        OKfAQhSMldU5nJFBPCMxNrFmLXzKlP8Buaqyx7XS7hoAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

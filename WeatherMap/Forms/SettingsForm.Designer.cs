@@ -47,9 +47,11 @@
             // 
             this.tbFontSize.Location = new System.Drawing.Point(6, 23);
             this.tbFontSize.Maximum = 5;
+            this.tbFontSize.Minimum = 1;
             this.tbFontSize.Name = "tbFontSize";
             this.tbFontSize.Size = new System.Drawing.Size(214, 45);
             this.tbFontSize.TabIndex = 10;
+            this.tbFontSize.Value = 3;
             // 
             // rbLight
             // 
@@ -62,7 +64,6 @@
             this.rbLight.TabStop = true;
             this.rbLight.Text = "Light";
             this.rbLight.UseVisualStyleBackColor = true;
-            this.rbLight.CheckedChanged += new System.EventHandler(this.rbLight_CheckedChanged);
             // 
             // rbDark
             // 
@@ -74,7 +75,6 @@
             this.rbDark.TabStop = true;
             this.rbDark.Text = "Dark";
             this.rbDark.UseVisualStyleBackColor = true;
-            this.rbDark.CheckedChanged += new System.EventHandler(this.rbDark_CheckedChanged);
             // 
             // gbTheme
             // 
