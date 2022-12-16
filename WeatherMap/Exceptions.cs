@@ -89,7 +89,7 @@ namespace WeatherMap
             if (!jsonData.ValidRequest) throw new BadResponseException("404 Not found.");
         }
 
-        public void checkCityCorrectnessByResponceCOD(QueryResponse jsonData)
+        public void CheckCityCorrectnessByResponceCod(QueryResponse jsonData)
         {
             if (jsonData.Cod != 200) throw new BadResponseException("Cod " + jsonData.Cod.ToString());
         }
@@ -123,11 +123,12 @@ namespace WeatherMap
                 }
             }
             else
+            {
                 e.Cancel = true;
             }
         }
 
-        public DialogResult openFormSafely(Form f)
+        public DialogResult OpenFormSafely(Form f)
         {
             try
             {
@@ -139,7 +140,7 @@ namespace WeatherMap
             }
         }
 
-        public void connectionIsAlive()
+        public void ConnectionIsAlive()
         {
             try
             {

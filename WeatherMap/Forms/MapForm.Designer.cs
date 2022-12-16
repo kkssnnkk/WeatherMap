@@ -64,11 +64,10 @@
             // btnConfirm
             // 
             this.btnConfirm.AutoSize = true;
-            this.btnConfirm.BackColor = System.Drawing.Color.Red;
+            this.btnConfirm.BackColor = System.Drawing.SystemColors.Control;
             this.btnConfirm.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnConfirm.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnConfirm.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnConfirm.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnConfirm.Location = new System.Drawing.Point(0, 418);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(801, 32);
@@ -88,14 +87,15 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MapForm";
-            this.Text = "Choose location by clicking middle mouse button...";
+            this.Text = "Choose location";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
 
         private GMap.NET.WindowsForms.GMapControl map;
-        private System.Windows.Forms.Button btnConfirm;
+        public System.Windows.Forms.Button btnConfirm;
     }
 }

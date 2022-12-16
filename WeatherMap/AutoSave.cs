@@ -13,12 +13,12 @@ namespace WeatherMap
         [Serializable]
         public struct DataToSave
         {
-            public string searchField;
-            public bool english;
-            public bool ukrainian;
-            public bool light;
-            public bool dark;
-            public int fontSize;
+            public string SearchField;
+            public bool English;
+            public bool Ukrainian;
+            public bool Light;
+            public bool Dark;
+            public int FontSize;
         };
 
         public DataToSave GetSaveDataStructure() { return _dataToSave; }

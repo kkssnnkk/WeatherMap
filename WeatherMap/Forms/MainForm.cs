@@ -36,13 +36,13 @@ namespace WeatherMap.Forms
         {
             var data = _autoSave.GetAppLastState();
             
-            cbSearch.Text = data.searchField;
+            cbSearch.Text = data.SearchField;
 
-            SettingsForm.rbEnglish.Checked   = data.english;
-            SettingsForm.rbUkrainian.Checked = data.ukrainian;
-            SettingsForm.rbLight.Checked     = data.light;
-            SettingsForm.rbDark.Checked      = data.dark;
-            SettingsForm.tbFontSize.Value    = data.fontSize;
+            SettingsForm.rbEnglish.Checked   = data.English;
+            SettingsForm.rbUkrainian.Checked = data.Ukrainian;
+            SettingsForm.rbLight.Checked     = data.Light;
+            SettingsForm.rbDark.Checked      = data.Dark;
+            SettingsForm.tbFontSize.Value    = data.FontSize;
         }
 
         // save app state
@@ -50,13 +50,13 @@ namespace WeatherMap.Forms
         {
             var data = _autoSave.GetSaveDataStructure();
             
-            data.searchField = cbSearch.Text;
+            data.SearchField = cbSearch.Text;
 
-            data.english   = SettingsForm.rbEnglish.Checked;
-            data.ukrainian = SettingsForm.rbUkrainian.Checked;
-            data.light     = SettingsForm.rbLight.Checked;
-            data.dark      = SettingsForm.rbDark.Checked;
-            data.fontSize  = SettingsForm.tbFontSize.Value;
+            data.English   = SettingsForm.rbEnglish.Checked;
+            data.Ukrainian = SettingsForm.rbUkrainian.Checked;
+            data.Light     = SettingsForm.rbLight.Checked;
+            data.Dark      = SettingsForm.rbDark.Checked;
+            data.FontSize  = SettingsForm.tbFontSize.Value;
 
             _autoSave.SaveAppState(data);
         }
@@ -146,6 +146,10 @@ namespace WeatherMap.Forms
                  
                 AboutAppForm.BackColor        = AboutAppForm.pictureBox1.BackColor =
                 AboutAppForm.label1.BackColor = Color.FromArgb(255, 240, 240, 240);
+
+                /* Map form */
+                MapForm.ForeColor = MapForm.btnConfirm.ForeColor = Color.FromArgb(255, 0, 0, 0);
+                MapForm.BackColor = MapForm.btnConfirm.BackColor = Color.FromArgb(255, 240, 240, 240);
             }
             else if (SettingsForm.rbDark.Checked)
             {
@@ -191,6 +195,10 @@ namespace WeatherMap.Forms
 
                 AboutAppForm.BackColor = AboutAppForm.pictureBox1.BackColor =
                 AboutAppForm.label1.BackColor = Color.FromArgb(255, 36, 36, 36);
+
+                /* Map form */
+                MapForm.ForeColor = MapForm.btnConfirm.ForeColor = Color.FromArgb(255, 255, 255, 255);
+                MapForm.BackColor = MapForm.btnConfirm.BackColor = Color.FromArgb(255, 36, 36, 36);
             }
         }
 
@@ -224,6 +232,9 @@ namespace WeatherMap.Forms
                 lStatus.Text = queryResponse.WeatherList[0].Main;
             }
 
+            pictureBox.Load($"http://openweathermap.org/img/wn/{queryResponse.WeatherList[0].Icon}@2x.png");
+
+            CenterElement(pictureBox);
             CenterElement(lLocation);
             CenterElement(lTemp);
             CenterElement(lStatus);            
