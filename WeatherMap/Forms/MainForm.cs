@@ -28,6 +28,7 @@ namespace WeatherMap.Forms
         {
             SetAppStateFromLastSave();
             ApplySettings();
+            CheckConnection();
             UpdateInfoFromApi(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
         }
 
@@ -261,7 +262,8 @@ namespace WeatherMap.Forms
             {
                 return;
             }
-            
+
+            CheckConnection();
             UpdateInfoFromApi(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByCoords(MapForm.Coords.Lat, MapForm.Coords.Lng)));    
         }
         
@@ -282,6 +284,7 @@ namespace WeatherMap.Forms
                 return;
             }
 
+            CheckConnection();
             UpdateInfoFromApi(new QueryResponse(_openWeatherMapApi.GetJsonResponseStringByName(cbSearch.Text)));
         }
         
@@ -359,6 +362,18 @@ namespace WeatherMap.Forms
             foreach (var item in cities)
             {
                 cbSearch.Items.Add(item);
+            }
+        }
+
+        private void CheckConnection() 
+        {
+            try
+            {
+                _exceptions.ConnectionIsAlive();
+            }
+            catch (ConnectionRefusedException exc)
+            {
+                ShowErrorMsg(exc.Message, "Warning");
             }
         }
     }
