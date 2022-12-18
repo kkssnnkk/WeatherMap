@@ -42,7 +42,7 @@ namespace WeatherMap.Forms
             SettingsForm.rbUkrainian.Checked = data.Ukrainian;
             SettingsForm.rbLight.Checked     = data.Light;
             SettingsForm.rbDark.Checked      = data.Dark;
-            SettingsForm.tbFontSize.Value    = data.FontSize;
+            SettingsForm.tbFontSize.Value    = data.FontSize == 0 ? 1 : data.FontSize;
         }
 
         // save app state
