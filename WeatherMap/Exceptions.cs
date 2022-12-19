@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using WeatherMap.OpenWeatherMapClasses;
 using System.Net.NetworkInformation;
+using System.IO;
 
 namespace WeatherMap
 {
@@ -68,7 +69,6 @@ namespace WeatherMap
         {
         }
     }
-
     public class ConnectionRefusedException : Exception
     {
         public ConnectionRefusedException()
@@ -78,6 +78,18 @@ namespace WeatherMap
         {
         }
         public ConnectionRefusedException(string message, Exception inner) : base(message, inner)
+        {
+        }
+    }
+    public class FileNotExistsException : Exception
+    {
+        public FileNotExistsException()
+        {
+        }
+        public FileNotExistsException(string message) : base(message)
+        {
+        }
+        public FileNotExistsException(string message, Exception inner) : base(message, inner)
         {
         }
     }
@@ -150,6 +162,18 @@ namespace WeatherMap
             catch (Exception)
             {
                 throw new ConnectionRefusedException("Check your internet connection.");
+            }
+        }
+
+        public void FileExists(string filepath)
+        {
+            try
+            {
+                if (!File.Exists(filepath)) throw new FileNotExistsException("File not found");
+            }
+            catch (Exception)
+            {
+                throw new FileNotExistsException("Unknown error while checking file path.");
             }
         }
     }

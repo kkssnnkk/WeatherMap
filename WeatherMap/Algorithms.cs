@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace WeatherMap
 {
     public class Algorithms
     {
         private readonly List<string> _cities;
+        private static readonly Exceptions _exceptions = new Exceptions();
 
         public Algorithms()
         {
@@ -16,8 +18,18 @@ namespace WeatherMap
 
         private static List<string> ReadData ()
         {
-            var cities = new List<string>(); 
             var filepath = $"{Environment.CurrentDirectory}\\worldcities.csv";
+
+            try 
+            {
+                _exceptions.FileExists(filepath);
+            }
+            catch (FileNotExistsException exc)
+            {
+                MessageBox.Show(exc.Message.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            var cities = new List<string>(); 
             using (var reader = new StreamReader(filepath)) 
             { 
                 string line,city = string.Empty ,country = string.Empty;

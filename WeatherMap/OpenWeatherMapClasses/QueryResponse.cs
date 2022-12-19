@@ -53,6 +53,7 @@ namespace WeatherMap.OpenWeatherMapClasses
             ValidRequest = true;
             Coordinates = new Coordinates(jsonData.SelectToken("coord"));
             
+            
             // ReSharper disable once PossibleNullReferenceException
             foreach (var weather in jsonData.SelectToken("weather"))
                 WeatherList.Add(new Weather(weather));
