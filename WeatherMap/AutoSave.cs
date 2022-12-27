@@ -9,20 +9,20 @@ namespace WeatherMap
         private DataToSave _dataToSave;
         private readonly BinaryFormatter _formatter = new BinaryFormatter();
 
-
+        // структура даних стану програми
         [Serializable]
         public struct DataToSave
         {
             public string SearchField;
-            public bool English;
-            public bool Ukrainian;
             public bool Light;
             public bool Dark;
             public int FontSize;
         };
 
+        // повертання структури даних
         public DataToSave GetSaveDataStructure() { return _dataToSave; }
 
+        // зберігання стану
         public void SaveAppState(DataToSave dataToSave)
         {
             _dataToSave = dataToSave;

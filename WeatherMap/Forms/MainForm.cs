@@ -39,8 +39,6 @@ namespace WeatherMap.Forms
             
             cbSearch.Text = data.SearchField;
 
-            SettingsForm.rbEnglish.Checked   = data.English;
-            SettingsForm.rbUkrainian.Checked = data.Ukrainian;
             SettingsForm.rbLight.Checked     = data.Light;
             SettingsForm.rbDark.Checked      = data.Dark;
             SettingsForm.tbFontSize.Value    = data.FontSize == 0 ? 1 : data.FontSize;
@@ -53,8 +51,6 @@ namespace WeatherMap.Forms
             
             data.SearchField = cbSearch.Text;
 
-            data.English   = SettingsForm.rbEnglish.Checked;
-            data.Ukrainian = SettingsForm.rbUkrainian.Checked;
             data.Light     = SettingsForm.rbLight.Checked;
             data.Dark      = SettingsForm.rbDark.Checked;
             data.FontSize  = SettingsForm.tbFontSize.Value;
@@ -64,15 +60,6 @@ namespace WeatherMap.Forms
 
         public void ApplySettings()
         {
-            if (SettingsForm.rbEnglish.Checked)
-            {
-
-            }
-            else if (SettingsForm.rbUkrainian.Checked)
-            {
-
-            }
-
             switch (SettingsForm.tbFontSize.Value)
             {
                 case 1:
@@ -118,14 +105,12 @@ namespace WeatherMap.Forms
                 btnChooseOnMap.BackColor = cbSearch.BackColor = Color.FromArgb(255, 255, 255, 255);
 
                 /*  Settings Form  */
-                SettingsForm.ForeColor =            SettingsForm.gbLanguage.ForeColor =  
-                SettingsForm.rbEnglish.ForeColor =  SettingsForm.rbUkrainian.ForeColor = 
+                SettingsForm.ForeColor =            
                 SettingsForm.gbFontSize.ForeColor = SettingsForm.tbFontSize.ForeColor =
                 SettingsForm.gbTheme.ForeColor =    SettingsForm.rbLight.ForeColor = 
                 SettingsForm.rbDark.ForeColor =     Color.FromArgb(255, 0, 0, 0);
 
-                SettingsForm.BackColor =            SettingsForm.gbLanguage.BackColor = 
-                SettingsForm.rbEnglish.BackColor =  SettingsForm.rbUkrainian.BackColor = 
+                SettingsForm.BackColor =           
                 SettingsForm.gbFontSize.BackColor = SettingsForm.tbFontSize.BackColor = 
                 SettingsForm.gbTheme.BackColor =    SettingsForm.rbLight.BackColor = 
                 SettingsForm.rbDark.BackColor =     Color.FromArgb(255, 240, 240, 240);
@@ -167,14 +152,12 @@ namespace WeatherMap.Forms
                 Color.FromArgb(255, 36, 36, 36);
 
                 /*  Settings Form  */
-                SettingsForm.ForeColor =            SettingsForm.gbLanguage.ForeColor =
-                SettingsForm.rbEnglish.ForeColor =  SettingsForm.rbUkrainian.ForeColor =
+                SettingsForm.ForeColor =     
                 SettingsForm.gbFontSize.ForeColor = SettingsForm.tbFontSize.ForeColor =
                 SettingsForm.gbTheme.ForeColor =    SettingsForm.rbLight.ForeColor =
                 SettingsForm.rbDark.ForeColor =     Color.FromArgb(255, 255, 255, 255);
 
-                SettingsForm.BackColor =            SettingsForm.gbLanguage.BackColor =
-                SettingsForm.rbEnglish.BackColor =  SettingsForm.rbUkrainian.BackColor =
+                SettingsForm.BackColor =           
                 SettingsForm.gbFontSize.BackColor = SettingsForm.tbFontSize.BackColor =
                 SettingsForm.gbTheme.BackColor =    SettingsForm.rbLight.BackColor =
                 SettingsForm.rbDark.BackColor =     Color.FromArgb(255, 36, 36, 36);

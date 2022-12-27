@@ -1,5 +1,4 @@
-﻿// ReSharper disable RedundantUsingDirective
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 using System;
 using System.Threading;
